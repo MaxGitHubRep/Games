@@ -42,29 +42,19 @@ public class Tiles extends javax.swing.JFrame {
         square.setSize(100, 50);
         square.setBackground(Color.black);
         square.setOpaque(true);
-        
-        
-        
-            
-            Thread animationThread = new Thread(new Runnable() {
-                public void run() {
-                    for (int i = 0; i < slide1.getHeight() + 1; i++) {
-                        slideBlock(i);
-                        try {
-                            Thread.sleep(speed);} catch (Exception ex) {}
-                    }
+  
+        Thread animationThread = new Thread(new Runnable() {
+            public void run() {
+                for (int i = 0; i < slide1.getHeight() + 1; i++) {
+                    slideBlock(i);
+                    try {
+                        Thread.sleep(speed);} catch (Exception ex) {}
                 }
-            });
+            }
+        });
 
-            animationThread.start();
-            
-            
-            
-            
-        
-        
-        
-        
+        animationThread.start();
+
         
         
     }
