@@ -18,12 +18,16 @@ public class Tiles extends javax.swing.JFrame {
 
     private boolean playing = false;
     private int level = 1;
+    private int H;
+    private final int W = 50;
+    private final int maxLevel = 10;
 
     JLabel square = new JLabel("");
     
     private void slideBlock(int i) {
         
         square.setLocation(0, i);
+        int rand = randomInt(1, 4);
         slide1.add(square);
         slide1.repaint();
         
@@ -36,10 +40,11 @@ public class Tiles extends javax.swing.JFrame {
         
         int squares = num * 5;
         int speed = 10 - level;
+        H = maxLevel - level;
         
         levelCounter.setText(num + ".");
         
-        square.setSize(100, 50);
+        square.setSize(H, W);
         square.setBackground(Color.black);
         square.setOpaque(true);
   
@@ -211,7 +216,7 @@ public class Tiles extends javax.swing.JFrame {
         );
         slide3Layout.setVerticalGroup(
             slide3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
+            .addGap(0, 438, Short.MAX_VALUE)
         );
 
         slide4.setBackground(new java.awt.Color(153, 255, 204));
@@ -246,18 +251,18 @@ public class Tiles extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(slide3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(slide2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(slide4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(slide1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(bottomBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         mBarOptions.setBackground(new java.awt.Color(204, 204, 204));
-        mBarOptions.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        mBarOptions.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         mBarOptions.setForeground(new java.awt.Color(255, 51, 51));
         mBarOptions.setText("Options");
         mBarOptions.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -353,9 +358,6 @@ public class Tiles extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
