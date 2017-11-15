@@ -19,46 +19,79 @@ public class Tiles extends javax.swing.JFrame {
     private boolean playing = false;
     private int level = 1;
     private int H;
-    private final int W = 50;
+    private final int W = 100;
     private final int maxLevel = 10;
+    private int tileID = 0;
+    private int counter = 0;
+    private JLabel[] tiles = new JLabel[maxLevel*(5)+1];
+    private int[] belongs = new int [maxLevel*(5)+1];
 
     JLabel square = new JLabel("");
     
-    private void slideBlock(int i) {
+    private void slideTile(JLabel label, int height) {
         
-        square.setLocation(0, i);
-        int rand = randomInt(1, 4);
-        slide1.add(square);
-        slide1.repaint();
+        label.setLocation(0, height);
         
-        if (i == slide1.getHeight()) {
-            square.setVisible(false);
+        switch (belongs[counter]) {
+            case 1:
+                slide1.add(label);
+                slide1.repaint();
+            case 2:
+                slide2.add(label);
+                slide2.repaint();
+            case 3:
+                slide3.add(label);
+                slide3.repaint();
+            case 4:
+                slide4.add(label);
+                slide4.repaint();
         }
+        
+        if (height == slide1.getHeight()) {
+            label.setVisible(false);
+        }
+        
     }
     
-    private void startLevel(int num) {
+    private void startLevel() {
         
-        int squares = num * 5;
+        int squares = level * 5;
         int speed = 10 - level;
-        H = maxLevel - level;
+        H = (maxLevel - level) * 10;
         
-        levelCounter.setText(num + ".");
-        
-        square.setSize(H, W);
-        square.setBackground(Color.black);
-        square.setOpaque(true);
-  
-        Thread animationThread = new Thread(new Runnable() {
-            public void run() {
-                for (int i = 0; i < slide1.getHeight() + 1; i++) {
-                    slideBlock(i);
+        levelCounter.setText(level + ".");
+        //for (int i = tileID; i < squares+tileID; i++) {
+        for (int i = 0; i < 5; i++) {
+            tiles[i] = new JLabel("");
+            tiles[i].setSize(H, W);
+            tiles[i].setBackground(Color.black);
+            tiles[i].setOpaque(true);
+            counter = i;
+            belongs[counter] = randomInt(1,4);
+            
+            Thread animationThread = new Thread(new Runnable() {
+                public void run() {
+                    for (int i = 0; i < slide1.getHeight() + 1; i++) {
+                        slideTile(tiles[counter], i);
+                        try {
+                            Thread.sleep(speed);} catch (Exception ex) {}
+                    }
+                }
+            });
+
+            animationThread.start();
+            tileID++;
+            
+            Thread delayThread = new Thread(new Runnable() {
+                public void run() {
                     try {
                         Thread.sleep(speed);} catch (Exception ex) {}
                 }
-            }
-        });
-
-        animationThread.start();
+            });
+            delayThread.start();
+        }
+        
+        
 
         
         
@@ -74,7 +107,7 @@ public class Tiles extends javax.swing.JFrame {
             playing = true;
             playNowButton.setVisible(false);
             
-            startLevel(level);
+            startLevel();
             
         }
         
