@@ -36,15 +36,19 @@ public class Tiles extends javax.swing.JFrame {
             case 1:
                 slide1.add(label);
                 slide1.repaint();
+                break;
             case 2:
                 slide2.add(label);
                 slide2.repaint();
+                break;
             case 3:
                 slide3.add(label);
                 slide3.repaint();
+                break;
             case 4:
                 slide4.add(label);
                 slide4.repaint();
+                break;
         }
         
         if (height == slide1.getHeight()) {
@@ -61,34 +65,33 @@ public class Tiles extends javax.swing.JFrame {
         
         levelCounter.setText(level + ".");
         //for (int i = tileID; i < squares+tileID; i++) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             tiles[i] = new JLabel("");
-            tiles[i].setSize(H, W);
+            tiles[i].setSize(W, H);
             tiles[i].setBackground(Color.black);
             tiles[i].setOpaque(true);
             counter = i;
             belongs[counter] = randomInt(1,4);
+            Thread[] threads = new Thread[maxLevel*(5)+1];
             
-            Thread animationThread = new Thread(new Runnable() {
+            threads[counter] = new Thread(new Runnable() {
                 public void run() {
                     for (int i = 0; i < slide1.getHeight() + 1; i++) {
                         slideTile(tiles[counter], i);
                         try {
-                            Thread.sleep(speed);} catch (Exception ex) {}
+                            Thread.sleep(speed);
+                        } catch (Exception ex) {}
                     }
                 }
             });
 
-            animationThread.start();
+            threads[counter].start();
+            
+            
+            //scheduleRunTask();
+            
             tileID++;
             
-            Thread delayThread = new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        Thread.sleep(speed);} catch (Exception ex) {}
-                }
-            });
-            delayThread.start();
         }
         
         
