@@ -18,6 +18,8 @@ public class Snake extends javax.swing.JFrame {
 
     private final int SPACE = 40;
     private final int BORDER = 400;
+    private final int ROWS = 8;
+    private final int SQUARES = ROWS*ROWS;
     
     private int DIREC = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
     private int INTERVAL = 0;
@@ -27,7 +29,8 @@ public class Snake extends javax.swing.JFrame {
     
     private int[] historyX = new int[9999];
     private int[] historyY = new int[9999];
-    JLabel[] tiles = new JLabel[9];
+    private int[] histDirec = new int[9999];
+    JLabel[] tiles = new JLabel[SQUARES];
     
     Random random = new Random();
     
@@ -37,10 +40,13 @@ public class Snake extends javax.swing.JFrame {
     
     private void moveSnake() {
 
-        ITERATION++;
+        if (SCORE != 0) {
+            ITERATION++;
+        }
         
         historyX[ITERATION] = snake.getX();
         historyY[ITERATION] = snake.getY();
+        histDirec[ITERATION] = DIREC;
         
         int oldX = snake.getX();
         int oldY = snake.getY();
@@ -49,30 +55,16 @@ public class Snake extends javax.swing.JFrame {
             INTERVAL++;
         }
 
-        switch (DIREC) {
-            case 1:
-                snake.setLocation(snake.getX(), snake.getY()-SPACE);
-                break;
-            case 2:
-                snake.setLocation(snake.getX(), snake.getY()+SPACE);
-                break;
-            case 3:
-                snake.setLocation(snake.getX()+SPACE, snake.getY());
-                break;
-            case 4:
-                snake.setLocation(snake.getX()-SPACE, snake.getY());
-                break;
+        addPosition(snake, DIREC);
+        for (int i = 0; i < SCORE; i++) {
+            addPosition(tiles[i], histDirec[ITERATION-i]);
         }
         
         if (snake.getX() == eatme.getX() && snake.getY() == eatme.getY()) {
             food = false;
             INTERVAL = 10;
             SPEED = SPEED - 10;
-            
-            //tiles[SCORE] = new JLabel("");
-            
             formatJLabel(tiles[SCORE], oldX, oldY);
-            
             SCORE++;
         } 
 
@@ -107,19 +99,53 @@ public class Snake extends javax.swing.JFrame {
         label.repaint();
     }
     
-    private void correctPosition(JLabel label) {    //LEFT OFF
-        if (label.getY() >= BORDER) {
-            label.setLocation(snake.getX(), 0);
+    private void addPosition(JLabel label, int direction) {
+        try {
             
-        } else if (label.getY() < 0) {
-            label.setLocation(label.getX(), BORDER);
-        }
+            switch (direction) {
+                case 1:
+                    label.setLocation(label.getX(), label.getY()-SPACE);
+                    break;
+                case 2:
+                    label.setLocation(label.getX(), label.getY()+SPACE);
+                    break;
+                case 3:
+                    label.setLocation(label.getX()+SPACE, label.getY());
+                    break;
+                case 4:
+                    label.setLocation(label.getX()-SPACE, label.getY());
+                    break;
+            }
+            
+        } catch (Exception ex) {
+            System.out.println(ex);
+    }
         
-        if (label.getX() >= BORDER) {
-            label.setLocation(0, label.getY());
+    }
+    
+    private void correctPosition(JLabel label) {
+        try {
+            
+          /*  if (!" ".equals(label.getText())) {
+                label = new JLabel("");
+            }*/
 
-        } else if (label.getX() < 0) {
-            label.setLocation(BORDER, label.getY());
+            if (label.getY() >= BORDER) {
+                label.setLocation(snake.getX(), 0);
+
+            } else if (label.getY() < 0) {
+                label.setLocation(label.getX(), BORDER);
+            }
+
+            if (label.getX() >= BORDER) {
+                label.setLocation(0, label.getY());
+
+            } else if (label.getX() < 0) {
+                label.setLocation(BORDER, label.getY());
+            }
+            
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
         
     }
@@ -149,7 +175,7 @@ public class Snake extends javax.swing.JFrame {
     
     
     private int getRCoord() {
-        return random.nextInt(5)*SPACE;
+        return random.nextInt(8)*SPACE;
     }
     
     public Snake() {
@@ -176,10 +202,11 @@ public class Snake extends javax.swing.JFrame {
             }
         });
 
-        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setBackground(new java.awt.Color(0, 0, 0));
 
-        snake.setBackground(new java.awt.Color(102, 255, 255));
+        snake.setBackground(new java.awt.Color(102, 255, 51));
         snake.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        snake.setText(" ");
         snake.setMaximumSize(new java.awt.Dimension(40, 40));
         snake.setMinimumSize(new java.awt.Dimension(40, 40));
         snake.setOpaque(true);
