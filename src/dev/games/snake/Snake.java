@@ -16,24 +16,39 @@ import javax.swing.JLabel;
  */
 public class Snake extends javax.swing.JFrame {
 
+    private final int SPACE = 40;
+    private final int BORDER = 400;
+    
     private int DIREC = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
-    private int SPACE = 40;
-    private int SPEED = 200;
-    private int BORDER = 400;
     private int INTERVAL = 0;
     private int SCORE = 0;
+    private int SPEED = 200;
+    private int ITERATION = 0;
+    
+    private int[] historyX = new int[9999];
+    private int[] historyY = new int[9999];
+    JLabel[] tiles = new JLabel[9];
+    
+    Random random = new Random();
     
     private boolean food = false;
     
     JLabel eatme = new JLabel("");
-    Random random = new Random();
     
     private void moveSnake() {
+
+        ITERATION++;
+        
+        historyX[ITERATION] = snake.getX();
+        historyY[ITERATION] = snake.getY();
+        
+        int oldX = snake.getX();
+        int oldY = snake.getY();
         
         if (food == false) {
             INTERVAL++;
         }
-        
+
         switch (DIREC) {
             case 1:
                 snake.setLocation(snake.getX(), snake.getY()-SPACE);
@@ -48,26 +63,22 @@ public class Snake extends javax.swing.JFrame {
                 snake.setLocation(snake.getX()-SPACE, snake.getY());
                 break;
         }
-
-        if (snake.getX() == eatme.getX() && snake.getY() == eatme.getY()) {
-            eatme.setVisible(false);
-            food = false;
-            SCORE++;
-            SPEED = SPEED - 10;
-        } 
         
-        if (snake.getY() > BORDER) {
-            snake.setLocation(snake.getX(), 0);
+        if (snake.getX() == eatme.getX() && snake.getY() == eatme.getY()) {
+            food = false;
+            INTERVAL = 10;
+            SPEED = SPEED - 10;
             
-        } if (snake.getY() < 0) {
-            snake.setLocation(snake.getX(), BORDER);
+            //tiles[SCORE] = new JLabel("");
             
-        } if (snake.getX() > BORDER) {
-            snake.setLocation(0, snake.getY());
+            formatJLabel(tiles[SCORE], oldX, oldY);
             
-        } if (snake.getX() < 0) {
-            snake.setLocation(BORDER, snake.getY());
-            
+            SCORE++;
+        } 
+
+        correctPosition(snake);
+        for (int i = 0; i < SCORE; i++) {
+            correctPosition(tiles[i]);
         }
         
         if (INTERVAL == 10) {
@@ -79,10 +90,36 @@ public class Snake extends javax.swing.JFrame {
             back.add(eatme);
             eatme.repaint();
             eatme.setLocation(getRCoord(), getRCoord());
-            
+
             food = true;
             INTERVAL = 0;
-             
+
+        }
+    }
+    
+    private void formatJLabel(JLabel label, int oldX, int oldY) {
+        label = new JLabel("");
+        label.setSize(SPACE, SPACE);
+        label.setOpaque(true);
+        label.setBackground(Color.cyan);
+        label.setLocation(oldX, oldY);
+        back.add(label);
+        label.repaint();
+    }
+    
+    private void correctPosition(JLabel label) {    //LEFT OFF
+        if (label.getY() >= BORDER) {
+            label.setLocation(snake.getX(), 0);
+            
+        } else if (label.getY() < 0) {
+            label.setLocation(label.getX(), BORDER);
+        }
+        
+        if (label.getX() >= BORDER) {
+            label.setLocation(0, label.getY());
+
+        } else if (label.getX() < 0) {
+            label.setLocation(BORDER, label.getY());
         }
         
     }
@@ -93,11 +130,16 @@ public class Snake extends javax.swing.JFrame {
 
         threads = new Thread(new Runnable() {
             public void run() {
+                
                 while (true) {
                     moveSnake();
+                    
                     try {
                         Thread.sleep(SPEED);
-                    } catch (Exception ex) {}
+                        
+                    } catch (Exception ex) {
+                    
+                    }
                 }
             }
         });
@@ -107,7 +149,7 @@ public class Snake extends javax.swing.JFrame {
     
     
     private int getRCoord() {
-        return random.nextInt(8)*SPACE;
+        return random.nextInt(5)*SPACE;
     }
     
     public Snake() {
