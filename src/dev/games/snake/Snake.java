@@ -7,6 +7,7 @@ package dev.games.snake;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 import javax.swing.JLabel;
 
 /**
@@ -25,6 +26,7 @@ public class Snake extends javax.swing.JFrame {
     private boolean food = false;
     
     JLabel eatme = new JLabel("");
+    Random random = new Random();
     
     private void moveSnake() {
         
@@ -76,7 +78,7 @@ public class Snake extends javax.swing.JFrame {
             eatme.setVisible(true);
             back.add(eatme);
             eatme.repaint();
-            eatme.setLocation(0, 0);
+            eatme.setLocation(getRCoord(), getRCoord());
             
             food = true;
             INTERVAL = 0;
@@ -101,6 +103,11 @@ public class Snake extends javax.swing.JFrame {
         });
 
         threads.start();
+    }
+    
+    
+    private int getRCoord() {
+        return random.nextInt(8)*SPACE;
     }
     
     public Snake() {
