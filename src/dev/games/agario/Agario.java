@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
  */
 public class Agario extends javax.swing.JFrame {
 
-    private final int spacing = 20;
+    private final int spacing = 40;
     public Agario() {
         initComponents();
     }
@@ -41,7 +41,6 @@ public class Agario extends javax.swing.JFrame {
 
         worm.setBackground(new java.awt.Color(102, 255, 255));
         worm.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        worm.setText("worm");
         worm.setMaximumSize(new java.awt.Dimension(40, 40));
         worm.setMinimumSize(new java.awt.Dimension(40, 40));
         worm.setOpaque(true);
@@ -52,15 +51,15 @@ public class Agario extends javax.swing.JFrame {
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addComponent(worm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addComponent(worm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(260, Short.MAX_VALUE))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addGap(120, 120, 120)
-                .addComponent(worm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addComponent(worm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
