@@ -49,6 +49,7 @@ public class Bugs extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bugs");
+        setResizable(false);
 
         back.setBackground(new java.awt.Color(102, 102, 102));
         back.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
