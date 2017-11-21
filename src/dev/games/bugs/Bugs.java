@@ -12,17 +12,18 @@ package dev.games.bugs;
 public class Bugs extends javax.swing.JFrame {
 
     protected void playMultiplayer() {
-        System.out.println("mp");
-        
+        this.dispose();
+        new Multiplayer().setVisible(true);
     }
     
     protected void playSingleplayer() {
-        System.out.println("sp");
-        
+        this.dispose();
+        new Singleplayer().setVisible(true);
     }
     
     protected void playBot() {
-        
+        this.dispose();
+        new Bots().setVisible(true);
         
     }
     

@@ -126,12 +126,9 @@ public class Snake extends javax.swing.JFrame {
     private void correctPosition(JLabel label) {
         try {
             
-          /*  if (!" ".equals(label.getText())) {
-                label = new JLabel("");
-            }*/
 
             if (label.getY() >= BORDER) {
-                label.setLocation(snake.getX(), 0);
+                label.setLocation(label.getX(), 0);
 
             } else if (label.getY() < 0) {
                 label.setLocation(label.getX(), BORDER);
