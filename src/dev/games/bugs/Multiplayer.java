@@ -18,48 +18,46 @@ public class Multiplayer extends javax.swing.JFrame {
 
     private final int BORDER = 400;
     private final int SPACE = 40;
+    private final int MAX_SCORE = 21;
+    private final int SPEED = 200;
     
     private int DIREC_ONE = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
     private int DIREC_TWO = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
     private int SCORE_ONE = 0;
     private int SCORE_TWO = 0;
-    private int SPEED = 200;
     private int INTERVAL = 0;
     private int PASSED = 0;
-    private int MAX_SCORE = 21;
+    private int oX, oY, tX, tY;
     
     private boolean eatMe = false;
+    private boolean setLoc = false;
     
     JLabel eatMeOne = new JLabel("");
     JLabel eatMeTwo = new JLabel("");
     
     private void playGame() {
-        
-        
-        
         if (INTERVAL == 5) {
-            
-            
-            
             if (eatMe == false) {
                 eatMe = true;
                 formatFoodOne();
                 formatFoodTwo();
-                
             } 
-            
             
         } else {
             INTERVAL++;
-            
+        }
+        
+        if (setLoc == true) {
+            bOne.setLocation(oX, oY);
+            bTwo.setLocation(tX, tY);
+            setLoc = false;
         }
         
         addPosition(bOne, DIREC_ONE);
         addPosition(bTwo, DIREC_TWO);
-        
         correctPosition(bOne);
         correctPosition(bTwo);
-        
+
         if (bOne.getX() == eatMeOne.getX() && bOne.getY() == eatMeOne.getY()) {
             foodEaten(1);
             
@@ -71,40 +69,38 @@ public class Multiplayer extends javax.swing.JFrame {
     }
     
     private void formatFoodOne() {
-        
         eatMeOne.setBackground(Color.RED);
         eatMeOne.setSize(SPACE, SPACE);
         eatMeOne.setOpaque(true);
         eatMeOne.setVisible(true);
         one.add(eatMeOne);
-        eatMeOne.repaint();
         eatMeOne.setLocation(getRCoord(), getRCoord());
         
     }
     
     private void formatFoodTwo() {
-        
         eatMeTwo.setBackground(Color.red);
         eatMeTwo.setSize(SPACE, SPACE);
         eatMeTwo.setOpaque(true);
         eatMeTwo.setVisible(true);
         two.add(eatMeTwo);
-        eatMeTwo.repaint();
         eatMeTwo.setLocation(getRCoord(), getRCoord());
-        
+
     }
     
     private void spawnFood() {
-        
         eatMeOne.setLocation(getRCoord(), getRCoord());
-        eatMeOne.setVisible(true);
-        
         eatMeTwo.setLocation(getRCoord(), getRCoord());
-        eatMeTwo.setVisible(true);
-        
+
     }
     
     private void foodEaten(int player) {
+        oX = eatMeOne.getX();
+        oY = eatMeOne.getY();
+        tX = eatMeTwo.getX();
+        tY = eatMeTwo.getY();
+        setLoc = true;
+        
         PASSED++;
         switch ( player ) {
             case 1:
@@ -129,7 +125,6 @@ public class Multiplayer extends javax.swing.JFrame {
     }
     
     public int randomInt(int min, int max) {
-        
         Random random = new Random();
         
         return random.nextInt((max-min)+1)+min;
@@ -164,8 +159,6 @@ public class Multiplayer extends javax.swing.JFrame {
     
     private void correctPosition(JLabel label) {
         try {
-            
-
             if (label.getY() >= BORDER) {
                 label.setLocation(label.getX(), 0);
 
@@ -188,25 +181,20 @@ public class Multiplayer extends javax.swing.JFrame {
     
     
     private void startGame() {
-
         Thread threads = new Thread();
 
         threads = new Thread(new Runnable() {
             public void run() {
-                
                 while (true) {
                     playGame();
-                    
                     try {
                         Thread.sleep(SPEED);
-                        
                     } catch (Exception ex) {
                     
                     }
                 }
             }
         });
-
         threads.start();
     }
     
@@ -272,6 +260,7 @@ public class Multiplayer extends javax.swing.JFrame {
         );
 
         two.setBackground(new java.awt.Color(0, 0, 0));
+        two.setMinimumSize(new java.awt.Dimension(400, 400));
         two.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 twoKeyPressed(evt);
@@ -301,6 +290,8 @@ public class Multiplayer extends javax.swing.JFrame {
         );
 
         one.setBackground(new java.awt.Color(0, 0, 0));
+        one.setMinimumSize(new java.awt.Dimension(400, 400));
+        one.setName(""); // NOI18N
 
         bOne.setBackground(new java.awt.Color(102, 255, 51));
         bOne.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -330,9 +321,9 @@ public class Multiplayer extends javax.swing.JFrame {
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
@@ -340,7 +331,7 @@ public class Multiplayer extends javax.swing.JFrame {
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(7, 7, 7)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
