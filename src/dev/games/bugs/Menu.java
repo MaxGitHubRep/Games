@@ -9,7 +9,7 @@ package dev.games.bugs;
  *
  * @author mc170171
  */
-public class Bugs extends javax.swing.JFrame {
+public class Menu extends javax.swing.JFrame {
 
     protected void playMultiplayer() {
         this.dispose();
@@ -27,7 +27,7 @@ public class Bugs extends javax.swing.JFrame {
         
     }
     
-    public Bugs() {
+    public Menu() {
         initComponents();
     }
 
@@ -167,9 +167,9 @@ public class Bugs extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void singleplayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_singleplayerButtonMouseClicked
-        playSingleplayer();
-    }//GEN-LAST:event_singleplayerButtonMouseClicked
+    private void playBotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playBotMouseClicked
+        playBot();
+    }//GEN-LAST:event_playBotMouseClicked
 
     private void multiplayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_multiplayerButtonMouseClicked
         playMultiplayer();
@@ -180,9 +180,9 @@ public class Bugs extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
 
-    private void playBotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playBotMouseClicked
-        playBot();
-    }//GEN-LAST:event_playBotMouseClicked
+    private void singleplayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_singleplayerButtonMouseClicked
+        playSingleplayer();
+    }//GEN-LAST:event_singleplayerButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -201,20 +201,21 @@ public class Bugs extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bugs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bugs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bugs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Bugs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Bugs().setVisible(true);
+                new Menu().setVisible(true);
             }
         });
     }
