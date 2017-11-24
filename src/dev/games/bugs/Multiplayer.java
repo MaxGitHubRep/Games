@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -39,8 +40,8 @@ public class Multiplayer extends javax.swing.JFrame {
         if (INTERVAL == 5) {
             if (eatMe == false) {
                 eatMe = true;
-                formatFoodOne();
-                formatFoodTwo();
+                formatFood(eatMeOne, one);
+                formatFood(eatMeTwo, two);
             } 
             
         } else {
@@ -65,27 +66,16 @@ public class Multiplayer extends javax.swing.JFrame {
             foodEaten(2);
             
         }
-        
     }
     
-    private void formatFoodOne() {
-        eatMeOne.setBackground(Color.RED);
-        eatMeOne.setSize(SPACE, SPACE);
-        eatMeOne.setOpaque(true);
-        eatMeOne.setVisible(true);
-        one.add(eatMeOne);
-        eatMeOne.setLocation(getRCoord(), getRCoord());
+    private void formatFood(JLabel label, JPanel add) {
+        label.setBackground(Color.RED);
+        label.setSize(SPACE, SPACE);
+        label.setOpaque(true);
+        label.setVisible(true);
+        add.add(label);
+        label.setLocation(getRCoord(), getRCoord());
         
-    }
-    
-    private void formatFoodTwo() {
-        eatMeTwo.setBackground(Color.red);
-        eatMeTwo.setSize(SPACE, SPACE);
-        eatMeTwo.setOpaque(true);
-        eatMeTwo.setVisible(true);
-        two.add(eatMeTwo);
-        eatMeTwo.setLocation(getRCoord(), getRCoord());
-
     }
     
     private void spawnFood() {

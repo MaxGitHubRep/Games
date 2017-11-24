@@ -100,8 +100,7 @@ public class Snake extends javax.swing.JFrame {
     }
     
     private void addPosition(JLabel label, int direction) {
-        try {
-            
+        try { 
             switch (direction) {
                 case 1:
                     label.setLocation(label.getX(), label.getY()-SPACE);
@@ -125,8 +124,6 @@ public class Snake extends javax.swing.JFrame {
     
     private void correctPosition(JLabel label) {
         try {
-            
-
             if (label.getY() >= BORDER) {
                 label.setLocation(label.getX(), 0);
 
