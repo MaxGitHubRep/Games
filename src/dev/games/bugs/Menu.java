@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dev.games.bugs;
 
 import javax.swing.ImageIcon;
@@ -23,12 +18,6 @@ public class Menu extends javax.swing.JFrame {
         new Singleplayer().setVisible(true);
     }
     
-    protected void playBot() {
-        this.dispose();
-        new Bots().setVisible(true);
-        
-    }
-    
     public Menu() {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG3.fw.png")).getImage());
@@ -45,11 +34,11 @@ public class Menu extends javax.swing.JFrame {
 
         back = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        singleplayerButton = new javax.swing.JLabel();
         close = new javax.swing.JLabel();
         multiplayerButton = new javax.swing.JLabel();
         highScoresButton1 = new javax.swing.JLabel();
-        playBot = new javax.swing.JLabel();
+        playSingleplayer = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bugs");
@@ -62,18 +51,9 @@ public class Menu extends javax.swing.JFrame {
         title.setForeground(new java.awt.Color(51, 204, 0));
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/title.fw.png"))); // NOI18N
 
-        singleplayerButton.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
-        singleplayerButton.setForeground(new java.awt.Color(0, 255, 51));
-        singleplayerButton.setText("Single Player");
-        singleplayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                singleplayerButtonMouseClicked(evt);
-            }
-        });
-
         close.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
         close.setForeground(new java.awt.Color(0, 255, 0));
-        close.setText("Close");
+        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/close.fw.png"))); // NOI18N
         close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 closeMouseClicked(evt);
@@ -82,7 +62,7 @@ public class Menu extends javax.swing.JFrame {
 
         multiplayerButton.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
         multiplayerButton.setForeground(new java.awt.Color(0, 255, 51));
-        multiplayerButton.setText("Multiplayer");
+        multiplayerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/multiplayer.fw.png"))); // NOI18N
         multiplayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 multiplayerButtonMouseClicked(evt);
@@ -91,69 +71,71 @@ public class Menu extends javax.swing.JFrame {
 
         highScoresButton1.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
         highScoresButton1.setForeground(new java.awt.Color(0, 255, 51));
-        highScoresButton1.setText("High Scores");
+        highScoresButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/high_scores.fw.png"))); // NOI18N
 
-        playBot.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
-        playBot.setForeground(new java.awt.Color(0, 255, 51));
-        playBot.setText("Bots");
-        playBot.addMouseListener(new java.awt.event.MouseAdapter() {
+        playSingleplayer.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
+        playSingleplayer.setForeground(new java.awt.Color(0, 255, 51));
+        playSingleplayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/singleplayer.fw.png"))); // NOI18N
+        playSingleplayer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                playBotMouseClicked(evt);
+                playSingleplayerMouseClicked(evt);
             }
         });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG3.fw.png"))); // NOI18N
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(title)
+                .addGap(88, 88, 88)
+                .addComponent(playSingleplayer)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(backLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(multiplayerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addGap(313, 313, 313)
-                        .addComponent(title))
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(backLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(highScoresButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(playBot)
-                .addGap(145, 145, 145))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                        .addComponent(singleplayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(close, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backLayout.createSequentialGroup()
-                    .addGap(37, 37, 37)
-                    .addComponent(multiplayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(450, Short.MAX_VALUE)))
+                        .addComponent(close)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(highScoresButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                        .addGap(22, 22, 22))))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(close))
-            .addGroup(backLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(singleplayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(title)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(highScoresButton1)
-                        .addContainerGap())
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(backLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(title)
+                                .addGap(30, 30, 30))
+                            .addGroup(backLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(playSingleplayer)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(60, 60, 60))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(playBot)
-                        .addGap(76, 76, 76))))
-            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backLayout.createSequentialGroup()
-                    .addGap(72, 72, 72)
-                    .addComponent(multiplayerButton)
-                    .addContainerGap(234, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)))
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
+                        .addComponent(multiplayerButton)
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(highScoresButton1)
+                            .addComponent(close))
+                        .addGap(47, 47, 47))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,9 +152,9 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void playBotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playBotMouseClicked
-        playBot();
-    }//GEN-LAST:event_playBotMouseClicked
+    private void playSingleplayerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSingleplayerMouseClicked
+        playSingleplayer();
+    }//GEN-LAST:event_playSingleplayerMouseClicked
 
     private void multiplayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_multiplayerButtonMouseClicked
         playMultiplayer();
@@ -182,10 +164,6 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
         System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
-
-    private void singleplayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_singleplayerButtonMouseClicked
-        playSingleplayer();
-    }//GEN-LAST:event_singleplayerButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -227,9 +205,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.JLabel close;
     private javax.swing.JLabel highScoresButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel multiplayerButton;
-    private javax.swing.JLabel playBot;
-    private javax.swing.JLabel singleplayerButton;
+    private javax.swing.JLabel playSingleplayer;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

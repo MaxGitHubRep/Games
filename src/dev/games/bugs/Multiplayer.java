@@ -52,9 +52,9 @@ public class Multiplayer extends javax.swing.JFrame {
             String direc;
             needBugFormat = false;
             
-            direc = "/dev/games/bugs/resources/bugmodels/BUG" + randomInt(1,3) +".fw.png";
+            direc = "/dev/games/bugs/resources/bugmodels/one/UP.fw.png";
             bOne.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
-            direc = "/dev/games/bugs/resources/bugmodels/BUG" + randomInt(1,3) +".fw.png";
+            //direc = "/dev/games/bugs/resources/bugmodels/one/" + randomInt(1,3) +".fw.png";
             bTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
  
         }
@@ -74,12 +74,14 @@ public class Multiplayer extends javax.swing.JFrame {
     }
     
     private void formatFood(JLabel label, JPanel add) {
-        label.setBackground(Color.RED);
+        label.setBackground(Color.cyan);
         label.setSize(SPACE, SPACE);
-        label.setOpaque(true);
         label.setVisible(true);
+        String direc = "/dev/games/bugs/resources/foodmodels/food.fw.png";
+        label.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
         add.add(label);
         label.setLocation(getRCoord(), getRCoord());
+        
         
     }
     
@@ -122,25 +124,34 @@ public class Multiplayer extends javax.swing.JFrame {
     }
     
     private void addPosition(JLabel label, int direction) {
+        String model = null;
         try {
             switch (direction) {
                 case 1:
                     label.setLocation(label.getX(), label.getY()-SPACE);
+                    model = "UP";
                     break;
                 case 2:
                     label.setLocation(label.getX(), label.getY()+SPACE);
+                    model = "DOWN";
                     break;
                 case 3:
                     label.setLocation(label.getX()+SPACE, label.getY());
+                    model = "RIGHT";
                     break;
                 case 4:
                     label.setLocation(label.getX()-SPACE, label.getY());
+                    model = "LEFT";
                     break;
             }
             
         } catch (Exception ex) {
             System.out.println(ex);
         }
+        
+        String direc = "/dev/games/bugs/resources/bugmodels/one/" + model + ".fw.png";
+        label.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
+        
     }
     
     private void correctPosition(JLabel label) {
