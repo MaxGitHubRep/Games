@@ -127,7 +127,7 @@ public class Bots extends javax.swing.JFrame {
                 SCORE_TWO++;
                 break;
         }
-        scoreTitle.setText(SCORE_ONE + " - " + SCORE_TWO);
+        //scoreTitle.setText(SCORE_ONE + " - " + SCORE_TWO);
         
         if (PASSED == MAX_SCORE) {
             this.dispose();

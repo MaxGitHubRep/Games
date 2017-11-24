@@ -8,6 +8,7 @@ package dev.games.bugs;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -30,6 +31,7 @@ public class Multiplayer extends javax.swing.JFrame {
     private int PASSED = 0;
     
     private boolean eatMe = false;
+    private boolean needBugFormat = true;
     
     JLabel eatMeOne = new JLabel("");
     JLabel eatMeTwo = new JLabel("");
@@ -44,6 +46,17 @@ public class Multiplayer extends javax.swing.JFrame {
             
         } else {
             INTERVAL++;
+        }
+        
+        if (needBugFormat == true) {
+            String direc;
+            needBugFormat = false;
+            
+            direc = "/dev/games/bugs/resources/bugmodels/BUG" + randomInt(1,3) +".fw.png";
+            bOne.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
+            direc = "/dev/games/bugs/resources/bugmodels/BUG" + randomInt(1,3) +".fw.png";
+            bTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
+ 
         }
         
         addPosition(bOne, DIREC_ONE);
@@ -174,6 +187,7 @@ public class Multiplayer extends javax.swing.JFrame {
     public Multiplayer() {
         initComponents();
         startGame();
+        this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG3.fw.png")).getImage());
     }
 
     /**
@@ -232,7 +246,7 @@ public class Multiplayer extends javax.swing.JFrame {
                 .addComponent(scoreTitle))
         );
 
-        two.setBackground(new java.awt.Color(0, 0, 0));
+        two.setBackground(new java.awt.Color(0, 204, 204));
         two.setMinimumSize(new java.awt.Dimension(400, 400));
         two.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -240,8 +254,9 @@ public class Multiplayer extends javax.swing.JFrame {
             }
         });
 
-        bTwo.setBackground(new java.awt.Color(102, 255, 51));
+        bTwo.setBackground(new java.awt.Color(0, 204, 204));
         bTwo.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        bTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG1.fw.png"))); // NOI18N
         bTwo.setText(" ");
         bTwo.setMaximumSize(new java.awt.Dimension(40, 40));
         bTwo.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -262,12 +277,13 @@ public class Multiplayer extends javax.swing.JFrame {
                 .addGap(0, 360, Short.MAX_VALUE))
         );
 
-        one.setBackground(new java.awt.Color(0, 0, 0));
+        one.setBackground(new java.awt.Color(0, 204, 204));
         one.setMinimumSize(new java.awt.Dimension(400, 400));
         one.setName(""); // NOI18N
 
-        bOne.setBackground(new java.awt.Color(102, 255, 51));
+        bOne.setBackground(new java.awt.Color(0, 204, 204));
         bOne.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        bOne.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG1.fw.png"))); // NOI18N
         bOne.setText(" ");
         bOne.setMaximumSize(new java.awt.Dimension(40, 40));
         bOne.setMinimumSize(new java.awt.Dimension(40, 40));

@@ -5,6 +5,8 @@
  */
 package dev.games.bugs;
 
+import javax.swing.ImageIcon;
+
 /** First attempt at a 2 player game.
  *
  * @author mc170171
@@ -29,6 +31,7 @@ public class Menu extends javax.swing.JFrame {
     
     public Menu() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG3.fw.png")).getImage());
     }
 
     /**
