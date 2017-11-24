@@ -60,7 +60,7 @@ public class Menu extends javax.swing.JFrame {
 
         title.setFont(new java.awt.Font("Agency FB", 1, 100)); // NOI18N
         title.setForeground(new java.awt.Color(51, 204, 0));
-        title.setText("Bugs");
+        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/title.fw.png"))); // NOI18N
 
         singleplayerButton.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
         singleplayerButton.setForeground(new java.awt.Color(0, 255, 51));
@@ -114,7 +114,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(backLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(highScoresButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(playBot)
                 .addGap(145, 145, 145))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
@@ -142,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(backLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(title)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(highScoresButton1)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
