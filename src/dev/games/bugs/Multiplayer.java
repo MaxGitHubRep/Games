@@ -28,10 +28,8 @@ public class Multiplayer extends javax.swing.JFrame {
     private int SCORE_TWO = 0;
     private int INTERVAL = 0;
     private int PASSED = 0;
-    private int oX, oY, tX, tY;
     
     private boolean eatMe = false;
-    private boolean setLoc = false;
     
     JLabel eatMeOne = new JLabel("");
     JLabel eatMeTwo = new JLabel("");
@@ -46,12 +44,6 @@ public class Multiplayer extends javax.swing.JFrame {
             
         } else {
             INTERVAL++;
-        }
-        
-        if (setLoc == true) {
-            bOne.setLocation(oX, oY);
-            bTwo.setLocation(tX, tY);
-            setLoc = false;
         }
         
         addPosition(bOne, DIREC_ONE);
@@ -85,12 +77,6 @@ public class Multiplayer extends javax.swing.JFrame {
     }
     
     private void foodEaten(int player) {
-        oX = eatMeOne.getX();
-        oY = eatMeOne.getY();
-        tX = eatMeTwo.getX();
-        tY = eatMeTwo.getY();
-        setLoc = true;
-        
         PASSED++;
         switch ( player ) {
             case 1:
@@ -100,7 +86,7 @@ public class Multiplayer extends javax.swing.JFrame {
                 SCORE_TWO++;
                 break;
         }
-        scoreTitle.setText(SCORE_ONE + " - " + SCORE_TWO);
+        //scoreTitle.setText(SCORE_ONE + " - " + SCORE_TWO);
         
         if (PASSED == MAX_SCORE) {
             this.dispose();
@@ -115,9 +101,7 @@ public class Multiplayer extends javax.swing.JFrame {
     }
     
     public int randomInt(int min, int max) {
-        Random random = new Random();
-        
-        return random.nextInt((max-min)+1)+min;
+        return new Random().nextInt((max-min)+1)+min;
     }
     
     private int getRCoord() {
@@ -126,7 +110,6 @@ public class Multiplayer extends javax.swing.JFrame {
     
     private void addPosition(JLabel label, int direction) {
         try {
-            
             switch (direction) {
                 case 1:
                     label.setLocation(label.getX(), label.getY()-SPACE);
@@ -349,7 +332,6 @@ public class Multiplayer extends javax.swing.JFrame {
     }//GEN-LAST:event_twoKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-
         int keyCode = evt.getKeyCode();
         switch( keyCode ) { 
             case KeyEvent.VK_UP:
