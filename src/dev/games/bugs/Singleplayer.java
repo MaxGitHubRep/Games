@@ -8,6 +8,7 @@ package dev.games.bugs;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -40,7 +41,6 @@ public class Singleplayer extends javax.swing.JFrame {
     
     private void playGame() {
         
-        
         if (needBugFormat == true) {
             String direc;
             needBugFormat = false;
@@ -67,9 +67,22 @@ public class Singleplayer extends javax.swing.JFrame {
         }
         
         if (distX > distY) {
-            DIREC_TWO = 4;
+            if (eatMeTwo.getX() > bTwo.getX()) {
+                DIREC_TWO = 3;
+                
+            } else {
+                DIREC_TWO = 4;
+            }
+            
+            
         } else {
-            DIREC_TWO = 1;
+            if (eatMeTwo.getY() > bTwo.getY()) {
+                DIREC_TWO = 1;
+                
+            } else {
+                DIREC_TWO = 1;
+            }
+
         }
         
         if (INTERVAL == 5) {
@@ -179,8 +192,6 @@ public class Singleplayer extends javax.swing.JFrame {
     
     private void correctPosition(JLabel label) {
         try {
-            
-
             if (label.getY() >= BORDER) {
                 label.setLocation(label.getX(), 0);
 
@@ -203,15 +214,11 @@ public class Singleplayer extends javax.swing.JFrame {
     
     
     private void startGame() {
-
         Thread threads = new Thread();
-
         threads = new Thread(new Runnable() {
             public void run() {
-                
                 while (true) {
                     playGame();
-                    
                     try {
                         Thread.sleep(SPEED);
                         
@@ -228,6 +235,7 @@ public class Singleplayer extends javax.swing.JFrame {
     public Singleplayer() {
         initComponents();
         startGame();
+        this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/three/1.png")).getImage());
     }
 
     /**
