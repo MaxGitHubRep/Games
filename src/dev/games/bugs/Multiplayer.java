@@ -40,7 +40,7 @@ public class Multiplayer extends javax.swing.JFrame {
     JLabel eatMeTwo = new JLabel("");
     
     private void playGame() {
-        scoreLabel.setText("Score: " + SCORE_ONE + " - " + SCORE_TWO + "  (Out of " + MAX_SCORE + ")");
+        //scoreLabel.setText("Score: " + SCORE_ONE + " - " + SCORE_TWO + "  (Out of " + MAX_SCORE + ")");
         
         if (INTERVAL == 5) {
             if (eatMe == false) {
@@ -326,8 +326,8 @@ public class Multiplayer extends javax.swing.JFrame {
             .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(backLayout.createSequentialGroup()
                     .addGap(20, 20, 20)
-                    .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(414, 414, 414)))
+                    .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(602, Short.MAX_VALUE)))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
