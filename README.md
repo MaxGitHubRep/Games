@@ -4,9 +4,9 @@ A repository for storing the code for all games.
 
  --- 
  
- ## Tiles
+ ## Bugs
  
-  - Tiles is a game in which a tile will fall from the top of the screen down to the bottom, and the user must interact with it before it hits the bottom. This game uses animations and keyboard listeners.
+  - Bugs is a game which encourporates singleplayer and multiplayer aspects in the form of bugs and worms in a snake-like retro game. 
   
  --- 
  
