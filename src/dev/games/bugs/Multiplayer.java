@@ -23,6 +23,9 @@ public class Multiplayer extends javax.swing.JFrame {
     private final int MAX_SCORE = 21;
     private final int SPEED = 200;
     
+    private final String bugModelOne = "one";
+    private final String bugModelTwo = "two";
+    
     private int DIREC_ONE = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
     private int DIREC_TWO = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
     private int SCORE_ONE = 0;
@@ -37,6 +40,8 @@ public class Multiplayer extends javax.swing.JFrame {
     JLabel eatMeTwo = new JLabel("");
     
     private void playGame() {
+        scoreLabel.setText("Score: " + SCORE_ONE + " - " + SCORE_TWO + "  (Out of " + MAX_SCORE + ")");
+        
         if (INTERVAL == 5) {
             if (eatMe == false) {
                 eatMe = true;
@@ -52,15 +57,15 @@ public class Multiplayer extends javax.swing.JFrame {
             String direc;
             needBugFormat = false;
             
-            direc = "/dev/games/bugs/resources/bugmodels/one/UP.fw.png";
+            direc = "/dev/games/bugs/resources/bugmodels/" + bugModelOne + "/1.png";
             bOne.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
-            //direc = "/dev/games/bugs/resources/bugmodels/one/" + randomInt(1,3) +".fw.png";
+            direc = "/dev/games/bugs/resources/bugmodels/" + bugModelTwo + "/1.png";
             bTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
  
         }
         
-        addPosition(bOne, DIREC_ONE);
-        addPosition(bTwo, DIREC_TWO);
+        addPosition(bOne, DIREC_ONE, bugModelOne);
+        addPosition(bTwo, DIREC_TWO, bugModelTwo);
         correctPosition(bOne);
         correctPosition(bTwo);
 
@@ -101,7 +106,6 @@ public class Multiplayer extends javax.swing.JFrame {
                 SCORE_TWO++;
                 break;
         }
-        //scoreTitle.setText(SCORE_ONE + " - " + SCORE_TWO);
         
         if (PASSED == MAX_SCORE) {
             this.dispose();
@@ -123,25 +127,20 @@ public class Multiplayer extends javax.swing.JFrame {
         return randomInt(1, 8)*SPACE;
     }
     
-    private void addPosition(JLabel label, int direction) {
-        String model = null;
+    private void addPosition(JLabel label, int direction, String type) {
         try {
             switch (direction) {
                 case 1:
                     label.setLocation(label.getX(), label.getY()-SPACE);
-                    model = "UP";
                     break;
                 case 2:
                     label.setLocation(label.getX(), label.getY()+SPACE);
-                    model = "DOWN";
                     break;
                 case 3:
                     label.setLocation(label.getX()+SPACE, label.getY());
-                    model = "RIGHT";
                     break;
                 case 4:
                     label.setLocation(label.getX()-SPACE, label.getY());
-                    model = "LEFT";
                     break;
             }
             
@@ -149,7 +148,7 @@ public class Multiplayer extends javax.swing.JFrame {
             System.out.println(ex);
         }
         
-        String direc = "/dev/games/bugs/resources/bugmodels/one/" + model + ".fw.png";
+        String direc = "/dev/games/bugs/resources/bugmodels/" + type + "/" + direction + ".png";
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
         
     }
@@ -198,7 +197,7 @@ public class Multiplayer extends javax.swing.JFrame {
     public Multiplayer() {
         initComponents();
         startGame();
-        this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG3.fw.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/three/1.png")).getImage());
     }
 
     /**
@@ -213,11 +212,11 @@ public class Multiplayer extends javax.swing.JFrame {
         back = new javax.swing.JPanel();
         banner = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        scoreTitle = new javax.swing.JLabel();
         two = new javax.swing.JPanel();
         bTwo = new javax.swing.JLabel();
         one = new javax.swing.JPanel();
         bOne = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bugs - Multiplyer");
@@ -237,24 +236,17 @@ public class Multiplayer extends javax.swing.JFrame {
         title.setForeground(new java.awt.Color(51, 204, 0));
         title.setText("Bugs - Multiplayer");
 
-        scoreTitle.setFont(new java.awt.Font("Agency FB", 1, 62)); // NOI18N
-        scoreTitle.setForeground(new java.awt.Color(51, 204, 0));
-        scoreTitle.setText("0 - 0");
-
         javax.swing.GroupLayout bannerLayout = new javax.swing.GroupLayout(banner);
         banner.setLayout(bannerLayout);
         bannerLayout.setHorizontalGroup(
             bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bannerLayout.createSequentialGroup()
                 .addComponent(title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scoreTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(457, Short.MAX_VALUE))
         );
         bannerLayout.setVerticalGroup(
             bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(title)
-                .addComponent(scoreTitle))
+            .addComponent(title)
         );
 
         two.setBackground(new java.awt.Color(0, 204, 204));
@@ -267,7 +259,7 @@ public class Multiplayer extends javax.swing.JFrame {
 
         bTwo.setBackground(new java.awt.Color(0, 204, 204));
         bTwo.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        bTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG1.fw.png"))); // NOI18N
+        bTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/two/1.png"))); // NOI18N
         bTwo.setText(" ");
         bTwo.setMaximumSize(new java.awt.Dimension(40, 40));
         bTwo.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -294,7 +286,7 @@ public class Multiplayer extends javax.swing.JFrame {
 
         bOne.setBackground(new java.awt.Color(0, 204, 204));
         bOne.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        bOne.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG1.fw.png"))); // NOI18N
+        bOne.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/one/1.png"))); // NOI18N
         bOne.setText(" ");
         bOne.setMaximumSize(new java.awt.Dimension(40, 40));
         bOne.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -315,17 +307,27 @@ public class Multiplayer extends javax.swing.JFrame {
                 .addGap(0, 360, Short.MAX_VALUE))
         );
 
+        scoreLabel.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        scoreLabel.setForeground(new java.awt.Color(0, 204, 51));
+        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        scoreLabel.setText("Score: 0 - 0 ");
+
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
+            .addGroup(backLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backLayout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(414, 414, 414)))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,7 +337,12 @@ public class Multiplayer extends javax.swing.JFrame {
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
+            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
+                    .addContainerGap(498, Short.MAX_VALUE)
+                    .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(12, 12, 12)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -431,7 +438,7 @@ public class Multiplayer extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.JPanel banner;
     private javax.swing.JPanel one;
-    private javax.swing.JLabel scoreTitle;
+    private javax.swing.JLabel scoreLabel;
     private javax.swing.JLabel title;
     private javax.swing.JPanel two;
     // End of variables declaration//GEN-END:variables

@@ -20,7 +20,7 @@ public class Menu extends javax.swing.JFrame {
     
     public Menu() {
         initComponents();
-        this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG3.fw.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/three/1.png")).getImage());
     }
 
     /**
@@ -38,7 +38,6 @@ public class Menu extends javax.swing.JFrame {
         multiplayerButton = new javax.swing.JLabel();
         highScoresButton1 = new javax.swing.JLabel();
         playSingleplayer = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bugs");
@@ -82,8 +81,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/BUG3.fw.png"))); // NOI18N
-
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
@@ -98,35 +95,23 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(multiplayerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(31, 31, 31)
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(close)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(highScoresButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
-                        .addGap(22, 22, 22))))
+                .addComponent(close)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(highScoresButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .addGap(22, 22, 22))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(backLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(title)
-                                .addGap(30, 30, 30))
-                            .addGroup(backLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(playSingleplayer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(60, 60, 60))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(title)
+                        .addGap(30, 30, 30))
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(playSingleplayer)))
+                .addGap(60, 60, 60)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
                         .addComponent(multiplayerButton)
@@ -205,7 +190,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.JLabel close;
     private javax.swing.JLabel highScoresButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel multiplayerButton;
     private javax.swing.JLabel playSingleplayer;
     private javax.swing.JLabel title;
