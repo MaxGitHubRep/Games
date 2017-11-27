@@ -52,7 +52,7 @@ public class Singleplayer extends javax.swing.JFrame {
  
         }
         
-        int distX = 0, distY = 0;
+        int distX, distY;
 
         if (bTwo.getX() > eatMeTwo.getX()) {
             distX = bTwo.getX() - eatMeTwo.getX();
