@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Multiplayer extends javax.swing.JFrame {
 
     private final int BORDER = 400;
     private final int SPACE = 40;
-    private final int MAX_SCORE = 21;
+    private final int MAX_SCORE = 10;
     private final int SPEED = 200;
     
     private final String bugModelOne = "one";
@@ -31,7 +32,6 @@ public class Multiplayer extends javax.swing.JFrame {
     private int SCORE_ONE = 0;
     private int SCORE_TWO = 0;
     private int INTERVAL = 0;
-    private int PASSED = 0;
     
     private boolean eatMe = false;
     private boolean needBugFormat = true;
@@ -41,6 +41,11 @@ public class Multiplayer extends javax.swing.JFrame {
     
     private void playGame() {
         //scoreLabel.setText("Score: " + SCORE_ONE + " - " + SCORE_TWO + "  (Out of " + MAX_SCORE + ")");
+        
+        formatProgressBar(pBarOne, SCORE_ONE);
+        formatProgressBar(pBarTwo, SCORE_TWO);
+        
+        
         
         if (INTERVAL == 5) {
             if (eatMe == false) {
@@ -78,6 +83,17 @@ public class Multiplayer extends javax.swing.JFrame {
         }
     }
     
+    private void formatProgressBar(JProgressBar bar, int score) {
+        bar.setStringPainted(true);
+        bar.setForeground(new Color(51, 204, 0));
+        bar.setString((score*(100/MAX_SCORE)) + "%");
+        
+        bar.setMaximum(MAX_SCORE*MAX_SCORE);
+        bar.setMinimum(0);
+        bar.setValue(score*(100/MAX_SCORE));
+        
+    }
+    
     private void formatFood(JLabel label, JPanel add) {
         label.setBackground(Color.cyan);
         label.setSize(SPACE, SPACE);
@@ -97,8 +113,7 @@ public class Multiplayer extends javax.swing.JFrame {
     }
     
     private void foodEaten(int player) {
-        PASSED++;
-        switch ( player ) {
+        switch (player) {
             case 1:
                 SCORE_ONE++;
                 break;
@@ -107,9 +122,9 @@ public class Multiplayer extends javax.swing.JFrame {
                 break;
         }
         
-        if (PASSED == MAX_SCORE) {
+        if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
             this.dispose();
-            new Menu().setVisible(true);
+            new EndGame().setVisible(true);
             System.out.println("Player 1 got: " + SCORE_ONE);
             System.out.println("Player 2 got: " + SCORE_TWO);
         }
@@ -194,7 +209,7 @@ public class Multiplayer extends javax.swing.JFrame {
         threads.start();
     }
     
-    public Multiplayer() {
+    public Multiplayer() { 
         initComponents();
         startGame();
         this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/three/1.png")).getImage());
@@ -216,7 +231,8 @@ public class Multiplayer extends javax.swing.JFrame {
         bTwo = new javax.swing.JLabel();
         one = new javax.swing.JPanel();
         bOne = new javax.swing.JLabel();
-        scoreLabel = new javax.swing.JLabel();
+        pBarOne = new javax.swing.JProgressBar();
+        pBarTwo = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bugs - Multiplyer");
@@ -307,27 +323,28 @@ public class Multiplayer extends javax.swing.JFrame {
                 .addGap(0, 360, Short.MAX_VALUE))
         );
 
-        scoreLabel.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        scoreLabel.setForeground(new java.awt.Color(0, 204, 51));
-        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        scoreLabel.setText("Score: 0 - 0 ");
-
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backLayout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(602, Short.MAX_VALUE)))
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pBarOne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pBarTwo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,12 +354,11 @@ public class Multiplayer extends javax.swing.JFrame {
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
-            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                    .addContainerGap(498, Short.MAX_VALUE)
-                    .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(12, 12, 12)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pBarOne, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pBarTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -355,7 +371,7 @@ public class Multiplayer extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -438,7 +454,8 @@ public class Multiplayer extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.JPanel banner;
     private javax.swing.JPanel one;
-    private javax.swing.JLabel scoreLabel;
+    private javax.swing.JProgressBar pBarOne;
+    private javax.swing.JProgressBar pBarTwo;
     private javax.swing.JLabel title;
     private javax.swing.JPanel two;
     // End of variables declaration//GEN-END:variables

@@ -1,6 +1,9 @@
 package dev.games.bugs;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /** First attempt at a 2 player game.
  *
@@ -16,6 +19,14 @@ public class Menu extends javax.swing.JFrame {
     protected void playSingleplayer() {
         this.dispose();
         new Singleplayer().setVisible(true);
+    }
+    
+    private void formatHover(JLabel label) {
+        label.setBorder(BorderFactory.createLineBorder(new Color(51, 204, 0)));
+    }
+    
+    private void formatExit(JLabel label) {
+        label.setBorder(BorderFactory.createEmptyBorder());
     }
     
     public Menu() {
@@ -35,7 +46,7 @@ public class Menu extends javax.swing.JFrame {
         back = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         close = new javax.swing.JLabel();
-        multiplayerButton = new javax.swing.JLabel();
+        playMultiplayer = new javax.swing.JLabel();
         highScoresButton1 = new javax.swing.JLabel();
         playSingleplayer = new javax.swing.JLabel();
 
@@ -57,14 +68,26 @@ public class Menu extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 closeMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                closeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                closeMouseExited(evt);
+            }
         });
 
-        multiplayerButton.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
-        multiplayerButton.setForeground(new java.awt.Color(0, 255, 51));
-        multiplayerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/multiplayer.fw.png"))); // NOI18N
-        multiplayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        playMultiplayer.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
+        playMultiplayer.setForeground(new java.awt.Color(0, 255, 51));
+        playMultiplayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/multiplayer.fw.png"))); // NOI18N
+        playMultiplayer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                multiplayerButtonMouseClicked(evt);
+                playMultiplayerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                playMultiplayerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                playMultiplayerMouseExited(evt);
             }
         });
 
@@ -73,11 +96,17 @@ public class Menu extends javax.swing.JFrame {
         highScoresButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/high_scores.fw.png"))); // NOI18N
 
         playSingleplayer.setFont(new java.awt.Font("Agency FB", 1, 75)); // NOI18N
-        playSingleplayer.setForeground(new java.awt.Color(0, 255, 51));
+        playSingleplayer.setForeground(new java.awt.Color(0, 153, 51));
         playSingleplayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/singleplayer.fw.png"))); // NOI18N
         playSingleplayer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 playSingleplayerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                playSingleplayerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                playSingleplayerMouseExited(evt);
             }
         });
 
@@ -93,7 +122,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(backLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(multiplayerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(playMultiplayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(31, 31, 31)
                 .addComponent(close)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -114,7 +143,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                        .addComponent(multiplayerButton)
+                        .addComponent(playMultiplayer)
                         .addGap(39, 39, 39))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
                         .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -141,14 +170,38 @@ public class Menu extends javax.swing.JFrame {
         playSingleplayer();
     }//GEN-LAST:event_playSingleplayerMouseClicked
 
-    private void multiplayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_multiplayerButtonMouseClicked
+    private void playMultiplayerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMultiplayerMouseClicked
         playMultiplayer();
-    }//GEN-LAST:event_multiplayerButtonMouseClicked
+    }//GEN-LAST:event_playMultiplayerMouseClicked
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         this.dispose();
         System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
+
+    private void playSingleplayerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSingleplayerMouseEntered
+        formatHover(playSingleplayer);
+    }//GEN-LAST:event_playSingleplayerMouseEntered
+
+    private void playSingleplayerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSingleplayerMouseExited
+        formatExit(playSingleplayer);
+    }//GEN-LAST:event_playSingleplayerMouseExited
+
+    private void playMultiplayerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMultiplayerMouseEntered
+        formatHover(playMultiplayer);
+    }//GEN-LAST:event_playMultiplayerMouseEntered
+
+    private void playMultiplayerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMultiplayerMouseExited
+        formatExit(playMultiplayer);
+    }//GEN-LAST:event_playMultiplayerMouseExited
+
+    private void closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseEntered
+        formatHover(close);
+    }//GEN-LAST:event_closeMouseEntered
+
+    private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
+        formatExit(close);
+    }//GEN-LAST:event_closeMouseExited
 
     /**
      * @param args the command line arguments
@@ -190,7 +243,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.JLabel close;
     private javax.swing.JLabel highScoresButton1;
-    private javax.swing.JLabel multiplayerButton;
+    private javax.swing.JLabel playMultiplayer;
     private javax.swing.JLabel playSingleplayer;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
