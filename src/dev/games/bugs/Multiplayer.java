@@ -40,12 +40,8 @@ public class Multiplayer extends javax.swing.JFrame {
     JLabel eatMeTwo = new JLabel("");
     
     private void playGame() {
-        //scoreLabel.setText("Score: " + SCORE_ONE + " - " + SCORE_TWO + "  (Out of " + MAX_SCORE + ")");
-        
         formatProgressBar(pBarOne, SCORE_ONE);
         formatProgressBar(pBarTwo, SCORE_TWO);
-        
-        
         
         if (INTERVAL == 5) {
             if (eatMe == false) {
@@ -336,13 +332,12 @@ public class Multiplayer extends javax.swing.JFrame {
                     .addGroup(backLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
                         .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(backLayout.createSequentialGroup()
                         .addComponent(pBarTwo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
