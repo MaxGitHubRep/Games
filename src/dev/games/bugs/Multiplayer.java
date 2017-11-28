@@ -5,13 +5,9 @@
  */
 package dev.games.bugs;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 
 /**
  *
@@ -19,36 +15,28 @@ import javax.swing.JProgressBar;
  */
 public class Multiplayer extends javax.swing.JFrame {
 
-    private final int BORDER = 400;
-    private final int SPACE = 40;
-    private final int MAX_SCORE = 10;
-    private final int SPEED = 200;
+    protected final int BORDER = 400, SPACE = 40, MAX_SCORE = 10, SPEED = 200;
     
-    private final String bugModelOne = "one";
-    private final String bugModelTwo = "two";
+    protected final String bugModelOne = "one", bugModelTwo = "two";
     
-    public int SCORE_ONE;
-    public int SCORE_TWO;
+    protected int SCORE_ONE, SCORE_TWO, DIREC_ONE = 1, DIREC_TWO = 1, INTERVAL = 0;
     
-    private int DIREC_ONE = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
-    private int DIREC_TWO = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
-    private int INTERVAL = 0;
+    protected boolean eatMe = false, needBugFormat = true;
     
-    private boolean eatMe = false;
-    private boolean needBugFormat = true;
+    protected JLabel eatMeOne = new JLabel("");
+    protected JLabel eatMeTwo = new JLabel("");
     
-    JLabel eatMeOne = new JLabel("");
-    JLabel eatMeTwo = new JLabel("");
+    protected Methods m = new Methods();
     
-    private void playGame() {
-        formatProgressBar(pBarOne, SCORE_ONE);
-        formatProgressBar(pBarTwo, SCORE_TWO);
+    protected void playGame() {
+        m.formatProgressBar(pBarOne, SCORE_ONE);
+        m.formatProgressBar(pBarTwo, SCORE_TWO);
         
         if (INTERVAL == 5) {
             if (eatMe == false) {
                 eatMe = true;
-                formatFood(eatMeOne, one);
-                formatFood(eatMeTwo, two);
+                m.formatFood(eatMeOne, one);
+                m.formatFood(eatMeTwo, two);
             } 
             
         } else {
@@ -56,20 +44,16 @@ public class Multiplayer extends javax.swing.JFrame {
         }
         
         if (needBugFormat == true) {
-            String direc;
             needBugFormat = false;
-            
-            direc = "/dev/games/bugs/resources/bugmodels/" + bugModelOne + "/1.png";
-            bOne.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
-            direc = "/dev/games/bugs/resources/bugmodels/" + bugModelTwo + "/1.png";
-            bTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
+            m.formatImageIcon(bugModelOne, bOne);
+            m.formatImageIcon(bugModelTwo, bTwo);
  
         }
         
-        addPosition(bOne, DIREC_ONE, bugModelOne);
-        addPosition(bTwo, DIREC_TWO, bugModelTwo);
-        correctPosition(bOne);
-        correctPosition(bTwo);
+        m.addPosition(bOne, DIREC_ONE, bugModelOne);
+        m.addPosition(bTwo, DIREC_TWO, bugModelTwo);
+        m.correctPosition(bOne);
+        m.correctPosition(bTwo);
 
         if (bOne.getX() == eatMeOne.getX() && bOne.getY() == eatMeOne.getY()) {
             foodEaten(1);
@@ -80,115 +64,28 @@ public class Multiplayer extends javax.swing.JFrame {
         }
     }
     
-    private void formatProgressBar(JProgressBar bar, int score) {
-        bar.setStringPainted(true);
-        bar.setForeground(new Color(51, 204, 0));
-        bar.setString((score*(100/MAX_SCORE)) + "%");
-        
-        bar.setMaximum(MAX_SCORE*MAX_SCORE);
-        bar.setMinimum(0);
-        bar.setValue(score*(100/MAX_SCORE));
-        
-    }
-    
-    private void formatFood(JLabel label, JPanel add) {
-        label.setBackground(Color.cyan);
-        label.setSize(SPACE, SPACE);
-        label.setVisible(true);
-        String direc = "/dev/games/bugs/resources/foodmodels/food.fw.png";
-        label.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
-        add.add(label);
-        label.setLocation(getRCoord(), getRCoord());
-        
-        
-    }
-    
-    private void spawnFood() {
-        eatMeOne.setLocation(getRCoord(), getRCoord());
-        eatMeTwo.setLocation(getRCoord(), getRCoord());
-
-    }
-    
-    private void foodEaten(int player) {
-        switch (player) {
-            case 1:
-                SCORE_ONE++;
-                break;
-            case 2:
-                SCORE_TWO++;
-                break;
+    protected void foodEaten(int player) {
+        if (player == 1) {
+            SCORE_ONE++;
+            
+        } else {
+            SCORE_TWO++;
+            
         }
         
         if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
             this.dispose();
             new EndGame().setVisible(true);
-            System.out.println("Player 1 got: " + SCORE_ONE);
-            System.out.println("Player 2 got: " + SCORE_TWO);
+            new EndGame().gameDone(SCORE_ONE, SCORE_TWO);
         }
         
         INTERVAL = 0;
-        spawnFood();
+        m.spawnFood(eatMeOne);
+        m.spawnFood(eatMeTwo);
         
     }
     
-    public int randomInt(int min, int max) {
-        return new Random().nextInt((max-min)+1)+min;
-    }
-    
-    private int getRCoord() {
-        return randomInt(1, 8)*SPACE;
-    }
-    
-    private void addPosition(JLabel label, int direction, String type) {
-        try {
-            switch (direction) {
-                case 1:
-                    label.setLocation(label.getX(), label.getY()-SPACE);
-                    break;
-                case 2:
-                    label.setLocation(label.getX(), label.getY()+SPACE);
-                    break;
-                case 3:
-                    label.setLocation(label.getX()+SPACE, label.getY());
-                    break;
-                case 4:
-                    label.setLocation(label.getX()-SPACE, label.getY());
-                    break;
-            }
-            
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        
-        String direc = "/dev/games/bugs/resources/bugmodels/" + type + "/" + direction + ".png";
-        label.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
-        
-    }
-    
-    private void correctPosition(JLabel label) {
-        try {
-            if (label.getY() >= BORDER) {
-                label.setLocation(label.getX(), 0);
-
-            } else if (label.getY() < 0) {
-                label.setLocation(label.getX(), BORDER);
-            }
-
-            if (label.getX() >= BORDER) {
-                label.setLocation(0, label.getY());
-
-            } else if (label.getX() < 0) {
-                label.setLocation(BORDER, label.getY());
-            }
-            
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        
-    }
-    
-    
-    private void startGame() {
+    protected void startGame() {
         Thread threads = new Thread();
 
         threads = new Thread(new Runnable() {
@@ -198,7 +95,7 @@ public class Multiplayer extends javax.swing.JFrame {
                     try {
                         Thread.sleep(SPEED);
                     } catch (Exception ex) {
-                    
+                        System.out.println(ex);
                     }
                 }
             }
@@ -264,11 +161,6 @@ public class Multiplayer extends javax.swing.JFrame {
 
         two.setBackground(new java.awt.Color(0, 204, 204));
         two.setMinimumSize(new java.awt.Dimension(400, 400));
-        two.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                twoKeyPressed(evt);
-            }
-        });
 
         bTwo.setBackground(new java.awt.Color(0, 204, 204));
         bTwo.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -373,39 +265,24 @@ public class Multiplayer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void twoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_twoKeyPressed
-        
-    }//GEN-LAST:event_twoKeyPressed
-
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        int keyCode = evt.getKeyCode();
-        switch( keyCode ) { 
+        switch(evt.getKeyCode()) { 
             case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 DIREC_TWO = 1;
                 break;
             case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 DIREC_TWO = 2;
                 break;
             case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 DIREC_TWO = 3;
                 break;
             case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 DIREC_TWO = 4;
                 break;
-                
-            case KeyEvent.VK_W:
-                DIREC_ONE = 1;
-                break;
-            case KeyEvent.VK_S:
-                DIREC_ONE = 2;
-                break;
-            case KeyEvent.VK_D:
-                DIREC_ONE = 3;
-                break;
-            case KeyEvent.VK_A:
-                DIREC_ONE = 4;
-                break;
-
         }
     }//GEN-LAST:event_formKeyPressed
 

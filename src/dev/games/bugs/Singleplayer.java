@@ -19,28 +19,31 @@ import javax.swing.JProgressBar;
  */
 public class Singleplayer extends javax.swing.JFrame {
 
-    private final int BORDER = 400;
-    private final int SPACE = 40;
+    protected final int BORDER = 400;
+    protected final int SPACE = 40;
+    protected final int MAX_SCORE = 10;
+    protected final int SPEED = 200;
     
-    private final String bugModelOne = "one";
-    private final String bugModelTwo = "two";
+    protected final String bugModelOne = "one";
+    protected final String bugModelTwo = "two";
     
-    private int DIREC_ONE = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
-    private int DIREC_TWO = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
-    private int SCORE_ONE = 0;
-    private int SCORE_TWO = 0;
-    private int SPEED = 200;
-    private int INTERVAL = 0;
-    private int MAX_SCORE = 10;
+    protected int DIREC_ONE = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
+    protected int DIREC_TWO = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
+    protected int SCORE_ONE = 0;
+    protected int SCORE_TWO = 0;
+    protected int INTERVAL = 0;
     
-    private boolean eatMe = false;
-    private boolean needBugFormat = true;
+    protected boolean eatMe = false;
+    protected boolean needBugFormat = true;
+    protected boolean stopFlow = false;
     
-    JLabel eatMeOne = new JLabel("");
-    JLabel eatMeTwo = new JLabel("");
+    protected JLabel eatMeOne = new JLabel("");
+    protected JLabel eatMeTwo = new JLabel("");
+    
+    protected Methods m = new Methods();
     
     private void playGame() {
-        formatProgressBar(pBarOne, SCORE_ONE);
+        m.formatProgressBar(pBarOne, SCORE_ONE);
         formatProgressBar(pBarTwo, SCORE_TWO);
         
         if (needBugFormat == true) {
@@ -146,7 +149,7 @@ public class Singleplayer extends javax.swing.JFrame {
     }
     
     private void foodEaten(int player) {
-        switch ( player ) {
+        switch (player) {
             case 1:
                 SCORE_ONE++;
                 break;
@@ -154,17 +157,22 @@ public class Singleplayer extends javax.swing.JFrame {
                 SCORE_TWO++;
                 break;
         }
-        //scoreTitle.setText(SCORE_ONE + " - " + SCORE_TWO);
-        
-        if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
-            this.dispose();
-            new Menu().setVisible(true);
-            System.out.println("Player 1 got: " + SCORE_ONE);
-            System.out.println("Player 2 got: " + SCORE_TWO);
+
+        if (stopFlow == false) {
+            if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
+                System.out.println("Player 1 got: " + SCORE_ONE);
+                System.out.println("Player 2 got: " + SCORE_TWO);
+                stopFlow = true;
+                this.dispose();
+                new EndGame().setVisible(eatMe);
+                new EndGame().gameDone(SCORE_ONE, SCORE_TWO);
+            }
+
+            INTERVAL = 0;
+            spawnFood();
         }
         
-        INTERVAL = 0;
-        spawnFood();
+        
         
     }
     

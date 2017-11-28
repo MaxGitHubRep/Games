@@ -11,15 +11,13 @@ package dev.games.bugs;
  */
 public class EndGame extends javax.swing.JFrame {
 
-    public void gameDone() {
-        Multiplayer instance = new Multiplayer();
-        
-        labelTest.setText(instance.SCORE_ONE + " - " + instance.SCORE_TWO);
+    public void gameDone(int one, int two) {
+        labelTest.setText("Final Score: " + one + " - " + two);
     }
     
     public EndGame() {
         initComponents();
-        gameDone();
+        //gameDone();
     }
 
     /**
@@ -35,6 +33,7 @@ public class EndGame extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         close = new javax.swing.JLabel();
         labelTest = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,7 +53,17 @@ public class EndGame extends javax.swing.JFrame {
             }
         });
 
-        labelTest.setText("jLabel1");
+        labelTest.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        labelTest.setForeground(new java.awt.Color(0, 204, 51));
+
+        jButton1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 204, 51));
+        jButton1.setText("Main Menu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -64,23 +73,29 @@ public class EndGame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(close))
             .addGroup(backLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelTest, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(title))
-                    .addGroup(backLayout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(labelTest, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 353, Short.MAX_VALUE))
+                        .addComponent(title)
+                        .addGap(148, 148, 148)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 162, Short.MAX_VALUE))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(title)
-                .addGap(92, 92, 92)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(title)
+                        .addGap(18, 18, 18))
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(labelTest, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(148, 148, 148)
                 .addComponent(close))
         );
 
@@ -102,6 +117,11 @@ public class EndGame extends javax.swing.JFrame {
         this.dispose();
         System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        new Menu().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +161,7 @@ public class EndGame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back;
     private javax.swing.JLabel close;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel labelTest;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
