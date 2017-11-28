@@ -27,10 +27,11 @@ public class Multiplayer extends javax.swing.JFrame {
     private final String bugModelOne = "one";
     private final String bugModelTwo = "two";
     
+    public int SCORE_ONE;
+    public int SCORE_TWO;
+    
     private int DIREC_ONE = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
     private int DIREC_TWO = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
-    private int SCORE_ONE = 0;
-    private int SCORE_TWO = 0;
     private int INTERVAL = 0;
     
     private boolean eatMe = false;

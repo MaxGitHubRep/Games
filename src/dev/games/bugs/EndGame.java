@@ -11,11 +11,15 @@ package dev.games.bugs;
  */
 public class EndGame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EndGame
-     */
+    public void gameDone() {
+        Multiplayer instance = new Multiplayer();
+        
+        labelTest.setText(instance.SCORE_ONE + " - " + instance.SCORE_TWO);
+    }
+    
     public EndGame() {
         initComponents();
+        gameDone();
     }
 
     /**
@@ -30,6 +34,7 @@ public class EndGame extends javax.swing.JFrame {
         back = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         close = new javax.swing.JLabel();
+        labelTest = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,24 +54,33 @@ public class EndGame extends javax.swing.JFrame {
             }
         });
 
+        labelTest.setText("jLabel1");
+
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(title)
-                .addGap(0, 529, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(close))
+            .addGroup(backLayout.createSequentialGroup()
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(title))
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(labelTest, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 353, Short.MAX_VALUE))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(title)
-                .addGap(277, 277, 277)
+                .addGap(92, 92, 92)
+                .addComponent(labelTest, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
                 .addComponent(close))
         );
 
@@ -127,6 +141,7 @@ public class EndGame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back;
     private javax.swing.JLabel close;
+    private javax.swing.JLabel labelTest;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
