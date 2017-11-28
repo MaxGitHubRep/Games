@@ -21,7 +21,7 @@ public class Multiplayer extends javax.swing.JFrame {
     
     protected int SCORE_ONE, SCORE_TWO, DIREC_ONE = 1, DIREC_TWO = 1, INTERVAL = 0;
     
-    protected boolean eatMe = false, needBugFormat = true;
+    protected boolean eatMe = false, needBugFormat = true, stopFlow = false;
     
     protected JLabel eatMeOne = new JLabel("");
     protected JLabel eatMeTwo = new JLabel("");
@@ -72,16 +72,20 @@ public class Multiplayer extends javax.swing.JFrame {
             SCORE_TWO++;
             
         }
-        
-        if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
-            this.dispose();
-            new EndGame().setVisible(true);
-            new EndGame().gameDone(SCORE_ONE, SCORE_TWO);
+        if (stopFlow == false) {
+            stopFlow = true;
+            
+            if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
+                this.dispose();
+                new EndGame().setVisible(true);
+                new EndGame().gameDone(SCORE_ONE, SCORE_TWO);
+            }
+
+            INTERVAL = 0;
+            m.spawnFood(eatMeOne);
+            m.spawnFood(eatMeTwo);
         }
         
-        INTERVAL = 0;
-        m.spawnFood(eatMeOne);
-        m.spawnFood(eatMeTwo);
         
     }
     

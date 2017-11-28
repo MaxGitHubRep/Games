@@ -19,23 +19,13 @@ import javax.swing.JProgressBar;
  */
 public class Singleplayer extends javax.swing.JFrame {
 
-    protected final int BORDER = 400;
-    protected final int SPACE = 40;
-    protected final int MAX_SCORE = 10;
-    protected final int SPEED = 200;
+    protected final int BORDER = 400, SPACE = 40, MAX_SCORE = 10, SPEED = 200;
     
-    protected final String bugModelOne = "one";
-    protected final String bugModelTwo = "two";
+    protected final String bugModelOne = "one", bugModelTwo = "two";
     
-    protected int DIREC_ONE = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
-    protected int DIREC_TWO = 1; // 1 = UP, 2 = DOWN, 3 = RIGHT, 4 = LEFT 
-    protected int SCORE_ONE = 0;
-    protected int SCORE_TWO = 0;
-    protected int INTERVAL = 0;
+    protected int SCORE_ONE, SCORE_TWO, DIREC_ONE = 1, DIREC_TWO = 1, INTERVAL = 0;
     
-    protected boolean eatMe = false;
-    protected boolean needBugFormat = true;
-    protected boolean stopFlow = false;
+    protected boolean eatMe = false, needBugFormat = true, stopFlow = false;
     
     protected JLabel eatMeOne = new JLabel("");
     protected JLabel eatMeTwo = new JLabel("");
@@ -44,16 +34,12 @@ public class Singleplayer extends javax.swing.JFrame {
     
     private void playGame() {
         m.formatProgressBar(pBarOne, SCORE_ONE);
-        formatProgressBar(pBarTwo, SCORE_TWO);
+        m.formatProgressBar(pBarTwo, SCORE_TWO);
         
         if (needBugFormat == true) {
-            String direc;
             needBugFormat = false;
-            
-            direc = "/dev/games/bugs/resources/bugmodels/" + bugModelOne + "/1.png";
-            bOne.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
-            direc = "/dev/games/bugs/resources/bugmodels/" + bugModelTwo + "/1.png";
-            bTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
+            m.formatImageIcon(bugModelOne, bOne);
+            m.formatImageIcon(bugModelTwo, bTwo);
  
         }
         
@@ -93,8 +79,8 @@ public class Singleplayer extends javax.swing.JFrame {
         if (INTERVAL == 5) {
             if (eatMe == false) {
                 eatMe = true;
-                formatFood(eatMeOne, one);
-                formatFood(eatMeTwo, two);
+                m.formatFood(eatMeOne, one);
+                m.formatFood(eatMeTwo, two);
                 
             } 
             
@@ -102,10 +88,10 @@ public class Singleplayer extends javax.swing.JFrame {
             INTERVAL++;
         }
         
-        addPosition(bOne, DIREC_ONE, bugModelOne);
-        addPosition(bTwo, DIREC_TWO, bugModelTwo);
-        correctPosition(bOne);
-        correctPosition(bTwo);
+        m.addPosition(bOne, DIREC_ONE, bugModelOne);
+        m.addPosition(bTwo, DIREC_TWO, bugModelTwo);
+        m.correctPosition(bOne);
+        m.correctPosition(bTwo);
         
         if (bOne.getX() == eatMeOne.getX() && bOne.getY() == eatMeOne.getY()) {
             foodEaten(1);
@@ -116,38 +102,7 @@ public class Singleplayer extends javax.swing.JFrame {
         }
         
     }
-    
-    private void formatProgressBar(JProgressBar bar, int score) {
-        bar.setStringPainted(true);
-        bar.setForeground(new Color(51, 204, 0));
-        bar.setString((score*(100/MAX_SCORE)) + "%");
-        
-        bar.setMaximum(MAX_SCORE*MAX_SCORE);
-        bar.setMinimum(0);
-        bar.setValue(score*(100/MAX_SCORE));
-        
-    }
-    
-    private void formatFood(JLabel label, JPanel add) {
-        label.setBackground(Color.cyan);
-        label.setSize(SPACE, SPACE);
-        label.setVisible(true);
-        String direc = "/dev/games/bugs/resources/foodmodels/food.fw.png";
-        label.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
-        add.add(label);
-        label.setLocation(getRCoord(), getRCoord());
-        
-    }
-    
-    private void spawnFood() {
-        eatMeOne.setLocation(getRCoord(), getRCoord());
-        eatMeOne.setVisible(true);
-        
-        eatMeTwo.setLocation(getRCoord(), getRCoord());
-        eatMeTwo.setVisible(true);
-        
-    }
-    
+
     private void foodEaten(int player) {
         switch (player) {
             case 1:
@@ -159,79 +114,22 @@ public class Singleplayer extends javax.swing.JFrame {
         }
 
         if (stopFlow == false) {
+            stopFlow = true;
+            
             if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
-                System.out.println("Player 1 got: " + SCORE_ONE);
-                System.out.println("Player 2 got: " + SCORE_TWO);
-                stopFlow = true;
                 this.dispose();
                 new EndGame().setVisible(eatMe);
                 new EndGame().gameDone(SCORE_ONE, SCORE_TWO);
             }
 
             INTERVAL = 0;
-            spawnFood();
+            m.spawnFood(eatMeOne);
+            m.spawnFood(eatMeTwo);
         }
         
         
         
     }
-    
-    public int randomInt(int min, int max) {
-        return new Random().nextInt((max-min)+1)+min;
-    }
-    
-    private int getRCoord() {
-        return randomInt(1, 8)*SPACE;
-    }
-    
-    private void addPosition(JLabel label, int direction, String type) {
-        try {
-            switch (direction) {
-                case 1:
-                    label.setLocation(label.getX(), label.getY()-SPACE);
-                    break;
-                case 2:
-                    label.setLocation(label.getX(), label.getY()+SPACE);
-                    break;
-                case 3:
-                    label.setLocation(label.getX()+SPACE, label.getY());
-                    break;
-                case 4:
-                    label.setLocation(label.getX()-SPACE, label.getY());
-                    break;
-            }
-            
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        
-        String direc = "/dev/games/bugs/resources/bugmodels/" + type + "/" + direction + ".png";
-        label.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
-        
-    }
-    
-    private void correctPosition(JLabel label) {
-        try {
-            if (label.getY() >= BORDER) {
-                label.setLocation(label.getX(), 0);
-
-            } else if (label.getY() < 0) {
-                label.setLocation(label.getX(), BORDER);
-            }
-
-            if (label.getX() >= BORDER) {
-                label.setLocation(0, label.getY());
-
-            } else if (label.getX() < 0) {
-                label.setLocation(BORDER, label.getY());
-            }
-            
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        
-    }
-    
     
     private void startGame() {
         Thread threads = new Thread();
