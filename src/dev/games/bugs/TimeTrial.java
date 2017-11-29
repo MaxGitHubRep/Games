@@ -58,10 +58,8 @@ public class TimeTrial extends javax.swing.JFrame {
         if (stopFlow == false) {
             if (SCORE_ONE == MAX_SCORE) {
                 stopFlow = true;
-                System.out.println(COUNT + " many times ");
-                
                 this.dispose();
-                new EndGame(SCORE_ONE, 0).setVisible(eatMe);
+                new EndGame("You took " + COUNT + " moves!").setVisible(eatMe);
             }
 
             INTERVAL = 0;

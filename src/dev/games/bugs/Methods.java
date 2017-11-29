@@ -118,20 +118,5 @@ public class Methods {
         }
         
     }
-
-    protected void writeToFile(String text, String filename) { // false will clear file
-        FileWriter writeObject;
-        PrintWriter printObject;
-        String my_dir = System.getProperty("user.dir") + "\\build\\classes\\dev\\games\\bugs\\database\\" + filename + ".txt";
-        
-        try {
-            writeObject = new FileWriter(my_dir, true);
-            printObject = new PrintWriter(writeObject);
-            printObject.println(text);
-            printObject.close();
-            
-        } catch (Exception ex) {}
-    }
-    
-    
+ 
 }

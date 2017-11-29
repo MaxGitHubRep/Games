@@ -76,7 +76,7 @@ public class Multiplayer extends javax.swing.JFrame {
             if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
                 stopFlow = true;
                 this.dispose();
-                new EndGame(SCORE_ONE, SCORE_TWO).setVisible(eatMe);
+                new EndGame("Final Score: " +SCORE_ONE + " - " + SCORE_TWO).setVisible(eatMe);
             }
 
             INTERVAL = 0;

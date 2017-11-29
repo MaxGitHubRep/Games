@@ -11,13 +11,13 @@ package dev.games.bugs;
  */
 public class EndGame extends javax.swing.JFrame {
 
-    public void gameDone(int one, int two) {
-        scoreOutput.setText("Final Score: " + one + " - " + two);
+    public void gameDone(String output) {
+        scoreOutput.setText(output);
     }
     
-    public EndGame(int one, int two) {
+    public EndGame(String output) {
         initComponents();
-        gameDone(one, two);
+        gameDone(output);
     }
 
     /**
@@ -172,7 +172,7 @@ public class EndGame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EndGame(0, 0).setVisible(true);
+                new EndGame("").setVisible(true);
             }
         });
     }
