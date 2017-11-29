@@ -269,23 +269,34 @@ public class Multiplayer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        switch(evt.getKeyCode()) { 
+        int keyCode = evt.getKeyCode();
+        switch( keyCode ) { 
             case KeyEvent.VK_UP:
-            case KeyEvent.VK_W:
                 DIREC_TWO = 1;
                 break;
             case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_S:
                 DIREC_TWO = 2;
                 break;
             case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_D:
                 DIREC_TWO = 3;
                 break;
             case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_A:
                 DIREC_TWO = 4;
                 break;
+                
+            case KeyEvent.VK_W:
+                DIREC_ONE = 1;
+                break;
+            case KeyEvent.VK_S:
+                DIREC_ONE = 2;
+                break;
+            case KeyEvent.VK_D:
+                DIREC_ONE = 3;
+                break;
+            case KeyEvent.VK_A:
+                DIREC_ONE = 4;
+                break;
+
         }
     }//GEN-LAST:event_formKeyPressed
 

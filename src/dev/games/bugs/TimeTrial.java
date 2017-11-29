@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dev.games.bugs;
+
+import java.awt.event.KeyEvent;
+import javax.swing.JLabel;
 
 /**
  *
@@ -11,11 +9,88 @@ package dev.games.bugs;
  */
 public class TimeTrial extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TimeTrial
-     */
+    protected final int BORDER = 400, SPACE = 40, MAX_SCORE = 10, SPEED = 200;
+    
+    protected final String bugModelOne = "one";
+    
+    protected int SCORE_ONE, DIREC_ONE = 1, INTERVAL = 0, COUNT = 0;
+    
+    protected boolean eatMe = false, needBugFormat = true, stopFlow = false;
+    
+    protected JLabel eatMeOne = new JLabel("");
+    
+    protected Methods m = new Methods();
+    
+    public void playGame() {
+        COUNT++;
+        m.formatProgressBar(pBarOne, SCORE_ONE);
+        
+        if (needBugFormat == true) {
+            needBugFormat = false;
+            m.formatImageIcon(bugModelOne, bOne);
+ 
+        }
+        
+        if (INTERVAL == 5) {
+            if (eatMe == false) {
+                eatMe = true;
+                m.formatFood(eatMeOne, one);
+                
+            } 
+            
+        } else {
+            INTERVAL++;
+        }
+        
+        m.addPosition(bOne, DIREC_ONE, bugModelOne);
+        m.correctPosition(bOne);
+        
+        if (bOne.getX() == eatMeOne.getX() && bOne.getY() == eatMeOne.getY()) {
+            foodEaten();
+            
+        }
+        
+    }
+    
+    private void foodEaten() {
+        SCORE_ONE++;
+
+        if (stopFlow == false) {
+            if (SCORE_ONE == MAX_SCORE) {
+                stopFlow = true;
+                System.out.println(COUNT + " many times ");
+                
+                this.dispose();
+                new EndGame(SCORE_ONE, 0).setVisible(eatMe);
+            }
+
+            INTERVAL = 0;
+            m.spawnFood(eatMeOne);
+        }
+    }
+    
+    private void startGame() {
+        Thread threads = new Thread();
+        threads = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    playGame();
+                    try {
+                        Thread.sleep(SPEED);
+                        
+                    } catch (Exception ex) {
+                    
+                    }
+                }
+            }
+        });
+
+        threads.start();
+    }
+    
     public TimeTrial() {
         initComponents();
+        startGame();
     }
 
     /**
@@ -27,21 +102,124 @@ public class TimeTrial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        back = new javax.swing.JPanel();
+        banner = new javax.swing.JPanel();
+        title = new javax.swing.JLabel();
+        one = new javax.swing.JPanel();
+        bOne = new javax.swing.JLabel();
+        pBarOne = new javax.swing.JProgressBar();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        back.setBackground(new java.awt.Color(102, 102, 102));
+        back.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        banner.setBackground(new java.awt.Color(153, 153, 153));
+
+        title.setFont(new java.awt.Font("Agency FB", 1, 62)); // NOI18N
+        title.setForeground(new java.awt.Color(51, 204, 0));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("Bugs • Time Trial");
+
+        javax.swing.GroupLayout bannerLayout = new javax.swing.GroupLayout(banner);
+        banner.setLayout(bannerLayout);
+        bannerLayout.setHorizontalGroup(
+            bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+        );
+        bannerLayout.setVerticalGroup(
+            bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        one.setBackground(new java.awt.Color(0, 204, 204));
+
+        bOne.setBackground(new java.awt.Color(0, 204, 204));
+        bOne.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        bOne.setText(" ");
+        bOne.setMaximumSize(new java.awt.Dimension(40, 40));
+        bOne.setMinimumSize(new java.awt.Dimension(40, 40));
+        bOne.setOpaque(true);
+
+        javax.swing.GroupLayout oneLayout = new javax.swing.GroupLayout(one);
+        one.setLayout(oneLayout);
+        oneLayout.setHorizontalGroup(
+            oneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(oneLayout.createSequentialGroup()
+                .addComponent(bOne, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 360, Short.MAX_VALUE))
+        );
+        oneLayout.setVerticalGroup(
+            oneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(oneLayout.createSequentialGroup()
+                .addComponent(bOne, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 360, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
+        back.setLayout(backLayout);
+        backLayout.setHorizontalGroup(
+            backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(pBarOne, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(backLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        backLayout.setVerticalGroup(
+            backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backLayout.createSequentialGroup()
+                .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pBarOne, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        switch(evt.getKeyCode()) { 
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
+                DIREC_ONE = 1;
+                break;
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
+                DIREC_ONE = 2;
+                break;
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
+                DIREC_ONE = 3;
+                break;
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
+                DIREC_ONE = 4;
+                break;
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
@@ -79,5 +257,11 @@ public class TimeTrial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bOne;
+    private javax.swing.JPanel back;
+    private javax.swing.JPanel banner;
+    private javax.swing.JPanel one;
+    private javax.swing.JProgressBar pBarOne;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

@@ -315,35 +315,23 @@ public class Singleplayer extends javax.swing.JFrame {
     }//GEN-LAST:event_twoKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-
-        int keyCode = evt.getKeyCode();
-        switch( keyCode ) { 
+        switch(evt.getKeyCode()) { 
             case KeyEvent.VK_UP:
-                DIREC_ONE = 1;
-                break;
-            case KeyEvent.VK_DOWN:
-                DIREC_ONE = 2;
-                break;
-            case KeyEvent.VK_RIGHT:
-                DIREC_ONE = 3;
-                break;
-            case KeyEvent.VK_LEFT:
-                DIREC_ONE = 4;
-                break;
-                
             case KeyEvent.VK_W:
                 DIREC_ONE = 1;
                 break;
+            case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
                 DIREC_ONE = 2;
                 break;
+            case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
                 DIREC_ONE = 3;
                 break;
+            case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
                 DIREC_ONE = 4;
                 break;
-
         }
     }//GEN-LAST:event_formKeyPressed
 
