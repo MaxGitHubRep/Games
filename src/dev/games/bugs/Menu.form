@@ -55,32 +55,25 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="mode" max="32767" attributes="0"/>
-                          <Component id="title" max="32767" attributes="0"/>
+                          <Component id="titleMenu" max="32767" attributes="0"/>
                           <Component id="playSingleplayer" max="32767" attributes="0"/>
                           <Component id="playMultiplayer" max="32767" attributes="0"/>
                       </Group>
                       <Component id="previousScores" min="-2" pref="380" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="close" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="rulesMP" alignment="0" max="32767" attributes="0"/>
-                              <Component id="howToPlay" max="32767" attributes="0"/>
-                              <Component id="rulesMode" max="32767" attributes="0"/>
-                              <Component id="rulesSP" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="close" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="bugs" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="rulesMP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="howToPlay" max="32767" attributes="0"/>
+                      <Component id="rulesMode" max="32767" attributes="0"/>
+                      <Component id="rulesSP" alignment="1" max="32767" attributes="0"/>
+                      <Component id="bugs" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -89,7 +82,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="title" min="-2" max="-2" attributes="0"/>
+                      <Component id="titleMenu" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="bugs" min="-2" pref="95" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -127,7 +120,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="title">
+        <Component class="javax.swing.JLabel" name="titleMenu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Agency FB" size="100" style="1"/>
@@ -136,7 +129,7 @@
               <Color blue="0" green="cc" red="33" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/dev/games/bugs/resources/textmodels/title.fw.png"/>
+              <Image iconType="3" name="/dev/games/bugs/resources/textmodels/title.png"/>
             </Property>
           </Properties>
         </Component>
@@ -149,7 +142,7 @@
               <Color blue="0" green="ff" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/dev/games/bugs/resources/textmodels/close.fw.png"/>
+              <Image iconType="3" name="/dev/games/bugs/resources/textmodels/close.png"/>
             </Property>
           </Properties>
           <Events>
@@ -283,7 +276,7 @@
         <Component class="javax.swing.JLabel" name="bugs">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/dev/games/bugs/resources/background/bugs.fw.png"/>
+              <Image iconType="3" name="/dev/games/bugs/resources/background/bugs.png"/>
             </Property>
           </Properties>
         </Component>
