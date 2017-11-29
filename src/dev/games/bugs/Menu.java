@@ -48,13 +48,13 @@ public class Menu extends javax.swing.JFrame {
         close = new javax.swing.JLabel();
         playSingleplayer = new javax.swing.JButton();
         playMultiplayer = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        previousScores = new javax.swing.JButton();
+        rulesMP = new javax.swing.JLabel();
+        rulesSP = new javax.swing.JLabel();
+        howToPlay = new javax.swing.JLabel();
         mode = new javax.swing.JComboBox<>();
-        modeRule = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        rulesMode = new javax.swing.JLabel();
+        bugs = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bugs");
@@ -85,27 +85,40 @@ public class Menu extends javax.swing.JFrame {
         playSingleplayer.setBackground(new java.awt.Color(51, 153, 0));
         playSingleplayer.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         playSingleplayer.setForeground(new java.awt.Color(51, 102, 0));
-        playSingleplayer.setText("Singleplayer");
+        playSingleplayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/three/1.png"))); // NOI18N
+        playSingleplayer.setText(" Singleplayer");
+        playSingleplayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playSingleplayerActionPerformed(evt);
+            }
+        });
 
         playMultiplayer.setBackground(new java.awt.Color(51, 153, 0));
         playMultiplayer.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         playMultiplayer.setForeground(new java.awt.Color(51, 102, 0));
-        playMultiplayer.setText("Multiplayer");
+        playMultiplayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/one/1.png"))); // NOI18N
+        playMultiplayer.setText(" Multiplayer");
+        playMultiplayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playMultiplayerActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(51, 153, 0));
-        jButton4.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(51, 102, 0));
-        jButton4.setText("Previous Scores");
+        previousScores.setBackground(new java.awt.Color(51, 153, 0));
+        previousScores.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        previousScores.setForeground(new java.awt.Color(51, 102, 0));
+        previousScores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/two/1.png"))); // NOI18N
+        previousScores.setText("Previous Scores");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/mp.fw.png"))); // NOI18N
+        rulesMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/mp.fw.png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/sp.fw.png"))); // NOI18N
+        rulesSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/sp.fw.png"))); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 70)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 153, 51));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("How to Play:");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        howToPlay.setFont(new java.awt.Font("Agency FB", 1, 70)); // NOI18N
+        howToPlay.setForeground(new java.awt.Color(0, 153, 51));
+        howToPlay.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        howToPlay.setText("How to Play:");
+        howToPlay.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         mode.setBackground(new java.awt.Color(51, 153, 0));
         mode.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
@@ -119,9 +132,9 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        modeRule.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/race.fw.png"))); // NOI18N
+        rulesMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/race.fw.png"))); // NOI18N
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/background/bugs.fw.png"))); // NOI18N
+        bugs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/background/bugs.fw.png"))); // NOI18N
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -135,7 +148,7 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(playSingleplayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(playMultiplayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(previousScores, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backLayout.createSequentialGroup()
@@ -143,13 +156,13 @@ public class Menu extends javax.swing.JFrame {
                             .addGroup(backLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(close))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(modeRule, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(rulesMP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(howToPlay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rulesMode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rulesSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(30, 30, 30))
                     .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bugs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         backLayout.setVerticalGroup(
@@ -159,28 +172,28 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(title)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bugs, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
+                        .addComponent(howToPlay)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(playSingleplayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(rulesSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rulesMP, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(playMultiplayer, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(mode)
-                    .addComponent(modeRule, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(rulesMode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(close))
-                    .addGroup(backLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(previousScores, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(close)))
                 .addGap(30, 30, 30))
         );
 
@@ -214,6 +227,14 @@ public class Menu extends javax.swing.JFrame {
     private void modeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_modeActionPerformed
+
+    private void playSingleplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playSingleplayerActionPerformed
+        playSingleplayer();
+    }//GEN-LAST:event_playSingleplayerActionPerformed
+
+    private void playMultiplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playMultiplayerActionPerformed
+        playMultiplayer();
+    }//GEN-LAST:event_playMultiplayerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,16 +274,16 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back;
+    private javax.swing.JLabel bugs;
     private javax.swing.JLabel close;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel howToPlay;
     private javax.swing.JComboBox<String> mode;
-    private javax.swing.JLabel modeRule;
     private javax.swing.JButton playMultiplayer;
     private javax.swing.JButton playSingleplayer;
+    private javax.swing.JButton previousScores;
+    private javax.swing.JLabel rulesMP;
+    private javax.swing.JLabel rulesMode;
+    private javax.swing.JLabel rulesSP;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
