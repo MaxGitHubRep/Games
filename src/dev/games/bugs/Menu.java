@@ -11,14 +11,43 @@ import javax.swing.JLabel;
  */
 public class Menu extends javax.swing.JFrame {
 
-    protected void playMultiplayer() {
-        this.dispose();
-        new Multiplayer().setVisible(true);
+    private void chooseMode(boolean single) {
+        
+        String item = mode.getSelectedItem() + "";
+        
+        if (item.contains("Time Trial")) {
+            this.dispose();
+            new TimeTrial().setVisible(true);
+            
+        } else if (item.contains("Race")) {
+            if (single == true) {
+                playSingleplayer(true);
+                
+            } else {
+                playMultiplayer(true);
+                
+            }
+            
+        } else if (item.contains("Frenzy")) {
+            if (single == true) {
+                playSingleplayer(false);
+                
+            } else {
+                playMultiplayer(false);
+                
+            }
+        }
+        
     }
     
-    protected void playSingleplayer() {
+    protected void playMultiplayer(boolean race) {
         this.dispose();
-        new Singleplayer().setVisible(true);
+        new Multiplayer(race).setVisible(true);
+    }
+    
+    protected void playSingleplayer(boolean race) {
+        this.dispose();
+        new Singleplayer(race).setVisible(true);
     }
     
     private void formatHover(JLabel label) {
@@ -234,11 +263,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_modeActionPerformed
 
     private void playSingleplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playSingleplayerActionPerformed
-        playSingleplayer();
+        chooseMode(true);
     }//GEN-LAST:event_playSingleplayerActionPerformed
 
     private void playMultiplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playMultiplayerActionPerformed
-        playMultiplayer();
+        chooseMode(false);
     }//GEN-LAST:event_playMultiplayerActionPerformed
 
     private void modeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_modeItemStateChanged

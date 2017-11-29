@@ -76,8 +76,7 @@ public class Multiplayer extends javax.swing.JFrame {
             if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
                 stopFlow = true;
                 this.dispose();
-                new EndGame().setVisible(true);
-                new EndGame().gameDone(SCORE_ONE, SCORE_TWO);
+                new EndGame(SCORE_ONE, SCORE_TWO).setVisible(eatMe);
             }
 
             INTERVAL = 0;
@@ -106,7 +105,7 @@ public class Multiplayer extends javax.swing.JFrame {
         threads.start();
     }
     
-    public Multiplayer() { 
+    public Multiplayer(boolean race) { 
         initComponents();
         startGame();
         this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/three/1.png")).getImage());
@@ -319,7 +318,7 @@ public class Multiplayer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Multiplayer().setVisible(true);
+                new Multiplayer(true).setVisible(true);
             }
         });
     }

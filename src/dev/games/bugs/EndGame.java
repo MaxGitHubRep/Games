@@ -15,9 +15,9 @@ public class EndGame extends javax.swing.JFrame {
         labelTest.setText("Final Score: " + one + " - " + two);
     }
     
-    public EndGame() {
+    public EndGame(int one, int two) {
         initComponents();
-        //gameDone();
+        gameDone(one, two);
     }
 
     /**
@@ -153,7 +153,7 @@ public class EndGame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EndGame().setVisible(true);
+                new EndGame(0, 0).setVisible(true);
             }
         });
     }
