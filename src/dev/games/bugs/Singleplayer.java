@@ -166,6 +166,7 @@ public class Singleplayer extends javax.swing.JFrame {
         back = new javax.swing.JPanel();
         banner = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         two = new javax.swing.JPanel();
         bTwo = new javax.swing.JLabel();
         one = new javax.swing.JPanel();
@@ -174,7 +175,7 @@ public class Singleplayer extends javax.swing.JFrame {
         pBarTwo = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Bugs - Multiplyer");
+        setTitle("Bugs • Singleplayer");
         setResizable(false);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -182,14 +183,16 @@ public class Singleplayer extends javax.swing.JFrame {
             }
         });
 
-        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setBackground(new java.awt.Color(102, 102, 102));
         back.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         banner.setBackground(new java.awt.Color(153, 153, 153));
 
         title.setFont(new java.awt.Font("Agency FB", 1, 62)); // NOI18N
         title.setForeground(new java.awt.Color(51, 204, 0));
-        title.setText("Bugs - Bots");
+        title.setText("Bugs • Singleplayer");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/background/bugs.png"))); // NOI18N
 
         javax.swing.GroupLayout bannerLayout = new javax.swing.GroupLayout(banner);
         banner.setLayout(bannerLayout);
@@ -197,11 +200,14 @@ public class Singleplayer extends javax.swing.JFrame {
             bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bannerLayout.createSequentialGroup()
                 .addComponent(title)
-                .addContainerGap(590, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         bannerLayout.setVerticalGroup(
             bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         two.setBackground(new java.awt.Color(0, 204, 204));
@@ -224,7 +230,7 @@ public class Singleplayer extends javax.swing.JFrame {
             twoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(twoLayout.createSequentialGroup()
                 .addComponent(bTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 360, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         twoLayout.setVerticalGroup(
             twoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +254,7 @@ public class Singleplayer extends javax.swing.JFrame {
             oneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(oneLayout.createSequentialGroup()
                 .addComponent(bOne, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 360, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         oneLayout.setVerticalGroup(
             oneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,22 +267,22 @@ public class Singleplayer extends javax.swing.JFrame {
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pBarOne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pBarOne, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                     .addComponent(one, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(two, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pBarTwo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(pBarTwo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, 836, Short.MAX_VALUE)
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
-                .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,16 +291,14 @@ public class Singleplayer extends javax.swing.JFrame {
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pBarOne, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pBarTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,6 +390,7 @@ public class Singleplayer extends javax.swing.JFrame {
     private javax.swing.JLabel bTwo;
     private javax.swing.JPanel back;
     private javax.swing.JPanel banner;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel one;
     private javax.swing.JProgressBar pBarOne;
     private javax.swing.JProgressBar pBarTwo;

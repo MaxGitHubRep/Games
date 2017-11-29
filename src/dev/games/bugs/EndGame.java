@@ -12,7 +12,7 @@ package dev.games.bugs;
 public class EndGame extends javax.swing.JFrame {
 
     public void gameDone(int one, int two) {
-        labelTest.setText("Final Score: " + one + " - " + two);
+        scoreOutput.setText("Final Score: " + one + " - " + two);
     }
     
     public EndGame(int one, int two) {
@@ -32,39 +32,52 @@ public class EndGame extends javax.swing.JFrame {
         back = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         close = new javax.swing.JLabel();
-        labelTest = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        scoreOutput = new javax.swing.JLabel();
+        goToMenu = new javax.swing.JButton();
+        goToMenu1 = new javax.swing.JButton();
+        bugs = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(983, 604));
 
         back.setBackground(new java.awt.Color(102, 102, 102));
         back.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         title.setFont(new java.awt.Font("Agency FB", 1, 100)); // NOI18N
         title.setForeground(new java.awt.Color(51, 204, 0));
-        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/title.fw.png"))); // NOI18N
+        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/title.png"))); // NOI18N
 
         close.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
         close.setForeground(new java.awt.Color(0, 255, 0));
-        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/close.fw.png"))); // NOI18N
+        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/textmodels/close.png"))); // NOI18N
         close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 closeMouseClicked(evt);
             }
         });
 
-        labelTest.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        labelTest.setForeground(new java.awt.Color(0, 204, 51));
+        scoreOutput.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        scoreOutput.setForeground(new java.awt.Color(0, 153, 51));
+        scoreOutput.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreOutput.setText("Final Score: 0 - 0");
 
-        jButton1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 204, 51));
-        jButton1.setText("Main Menu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        goToMenu.setBackground(new java.awt.Color(51, 153, 0));
+        goToMenu.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        goToMenu.setForeground(new java.awt.Color(51, 102, 0));
+        goToMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/three/1.png"))); // NOI18N
+        goToMenu.setText("Main Menu");
+        goToMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                goToMenuActionPerformed(evt);
             }
         });
+
+        goToMenu1.setBackground(new java.awt.Color(51, 153, 0));
+        goToMenu1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        goToMenu1.setForeground(new java.awt.Color(51, 102, 0));
+        goToMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/two/1.png"))); // NOI18N
+        goToMenu1.setText("Previous Scores");
+
+        bugs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/background/bugs.png"))); // NOI18N
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -72,47 +85,48 @@ public class EndGame extends javax.swing.JFrame {
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(close)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(title)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(labelTest, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(169, 563, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(close, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(goToMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(goToMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bugs, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(scoreOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
-                .addComponent(title)
-                .addGap(18, 18, 18)
-                .addComponent(labelTest, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148)
-                .addComponent(close))
+                .addGap(30, 30, 30)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backLayout.createSequentialGroup()
+                        .addComponent(bugs, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(scoreOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(title))
+                .addGap(26, 26, 26)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addComponent(goToMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(goToMenu1))
+                    .addComponent(close))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -123,10 +137,10 @@ public class EndGame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void goToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToMenuActionPerformed
         this.dispose();
         new Menu().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_goToMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,9 +179,11 @@ public class EndGame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back;
+    private javax.swing.JLabel bugs;
     private javax.swing.JLabel close;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel labelTest;
+    private javax.swing.JButton goToMenu;
+    private javax.swing.JButton goToMenu1;
+    private javax.swing.JLabel scoreOutput;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
