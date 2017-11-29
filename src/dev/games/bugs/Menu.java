@@ -108,11 +108,11 @@ public class Menu extends javax.swing.JFrame {
         previousScores.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         previousScores.setForeground(new java.awt.Color(51, 102, 0));
         previousScores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/bugmodels/two/1.png"))); // NOI18N
-        previousScores.setText("Previous Scores");
+        previousScores.setText(" Previous Scores");
 
-        rulesMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/mp.fw.png"))); // NOI18N
+        rulesMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rulemodels/mp.png"))); // NOI18N
 
-        rulesSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/sp.fw.png"))); // NOI18N
+        rulesSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rulemodels/sp.png"))); // NOI18N
 
         howToPlay.setFont(new java.awt.Font("Agency FB", 1, 70)); // NOI18N
         howToPlay.setForeground(new java.awt.Color(0, 153, 51));
@@ -123,16 +123,21 @@ public class Menu extends javax.swing.JFrame {
         mode.setBackground(new java.awt.Color(51, 153, 0));
         mode.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         mode.setForeground(new java.awt.Color(51, 102, 0));
-        mode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                       Race", "                      Frenzy", "                   Time Trial" }));
+        mode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                        Race", "                      Frenzy", "                    Time Trial" }));
         mode.setToolTipText("Currently playing this mode!");
         mode.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mode.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                modeItemStateChanged(evt);
+            }
+        });
         mode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modeActionPerformed(evt);
             }
         });
 
-        rulesMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rule models/race.fw.png"))); // NOI18N
+        rulesMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/rulemodels/race.png"))); // NOI18N
 
         bugs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dev/games/bugs/resources/background/bugs.fw.png"))); // NOI18N
 
@@ -235,6 +240,12 @@ public class Menu extends javax.swing.JFrame {
     private void playMultiplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playMultiplayerActionPerformed
         playMultiplayer();
     }//GEN-LAST:event_playMultiplayerActionPerformed
+
+    private void modeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_modeItemStateChanged
+        String item = (mode.getSelectedItem() + "").replaceAll("  ", "");
+        String direc = "/dev/games/bugs/resources/rulemodels/" + item + ".png";
+        rulesMode.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
+    }//GEN-LAST:event_modeItemStateChanged
 
     /**
      * @param args the command line arguments

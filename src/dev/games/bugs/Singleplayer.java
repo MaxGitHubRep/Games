@@ -114,9 +114,8 @@ public class Singleplayer extends javax.swing.JFrame {
         }
 
         if (stopFlow == false) {
-            stopFlow = true;
-            
             if (SCORE_ONE == MAX_SCORE || SCORE_TWO == MAX_SCORE) {
+                stopFlow = true;
                 this.dispose();
                 new EndGame().setVisible(eatMe);
                 new EndGame().gameDone(SCORE_ONE, SCORE_TWO);
