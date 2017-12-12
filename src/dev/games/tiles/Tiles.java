@@ -61,12 +61,23 @@ public class Tiles extends javax.swing.JFrame {
         return slide1;
     }
     
+    protected void endGame() {
+        JOptionPane.showMessageDialog(rootPane, "Well done you did it!");
+        this.dispose();
+        
+    }
+    
     protected void newRound() {
         roundCounter = 0;
         round++;
-        levelCounter.setText("Round: " + round);
+        if (round-1 == ROUNDS) {
+            endGame();
+        } else {
+            levelCounter.setText("Round: " + round);
         speed = speed - 10;
         timeout = 0;
+        }
+
     }
     
     protected void playGame() {
@@ -96,7 +107,7 @@ public class Tiles extends javax.swing.JFrame {
     
     protected void startGame() {
         
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < (TILE_PER_ROUND*ROUNDS); i++) {
             tiles[i] = new JLabel();
         }
         
@@ -192,7 +203,8 @@ public class Tiles extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        bottomBanner.setBackground(new java.awt.Color(0, 0, 0));
+        bottomBanner.setBackground(new java.awt.Color(255, 0, 0));
+        bottomBanner.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout bottomBannerLayout = new javax.swing.GroupLayout(bottomBanner);
         bottomBanner.setLayout(bottomBannerLayout);
@@ -241,7 +253,7 @@ public class Tiles extends javax.swing.JFrame {
         );
         slide3Layout.setVerticalGroup(
             slide3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
         );
 
         slide4.setBackground(new java.awt.Color(153, 255, 204));
