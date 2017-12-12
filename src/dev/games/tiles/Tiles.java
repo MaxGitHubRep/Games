@@ -10,111 +10,113 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /**
  *
  * @author MC170171
  */
 public class Tiles extends javax.swing.JFrame {
 
-    private boolean playing = false;
-    private int level = 1;
-    private int H;
-    private final int W = 100;
-    private final int maxLevel = 10;
-    private int tileID = 0;
-    private int counter = 0;
-    private JLabel[] tiles = new JLabel[maxLevel*(5)+1];
-    private int[] belongs = new int [maxLevel*(5)+1];
-
-    JLabel square = new JLabel("");
+    protected final int ROUNDS = 10;
+    protected final int TILE_PER_ROUND = 20;
+    protected final int TILE_WIDTH = 100;
+    protected final int TILE_HEIGHT = 100;
     
-    private void slideTile(JLabel label, int height) {
-        
-        label.setLocation(0, height);
-        
-        switch (belongs[counter]) {
-            case 1:
-                slide1.add(label);
-                slide1.repaint();
-                break;
-            case 2:
-                slide2.add(label);
-                slide2.repaint();
-                break;
-            case 3:
-                slide3.add(label);
-                slide3.repaint();
-                break;
-            case 4:
-                slide4.add(label);
-                slide4.repaint();
-                break;
-        }
-        
-        if (height == slide1.getHeight()) {
-            label.setVisible(false);
-        }
+    protected int speed = 100;
+    protected int counter = 0;
+    protected int index = 10;
+    protected int round = 0;
+    protected int roundCounter = 0;
+    protected int timeout = 0;
+    
+    protected JLabel[] tiles = new JLabel[TILE_PER_ROUND*ROUNDS];
+    
+    protected void formatTile(JLabel label, JPanel panel) {
+        label.setSize(TILE_WIDTH, TILE_HEIGHT);
+        label.setBackground(Color.black);
+        label.setOpaque(true);
+        panel.add(label);
+        label.setLocation(0, 0);
+        label.setVisible(true);
+        repaint();
         
     }
     
-    private void startLevel() {
+    protected void updateTileLocation(JLabel tile) {
+        tile.setLocation(tile.getX(), tile.getY()+10);
+        repaint();
+    }
+    
+    protected JPanel getRandomPanel() {
+        switch (randomInt(1,4)) {
+            case 1:
+                return slide1;
+            case 2:
+                return slide2;
+            case 3:
+                return slide3;
+            case 4:
+                return slide4;
+        }
+        return slide1;
+    }
+    
+    protected void newRound() {
+        roundCounter = 0;
+        round++;
+        levelCounter.setText("Round: " + round);
+        speed = speed - 10;
+        timeout = 0;
+    }
+    
+    protected void playGame() {
         
-        int squares = level * 5;
-        int speed = 10 - level;
-        H = (maxLevel - level) * 10;
+        for (int i = 0; i < counter; i++) {
+            updateTileLocation(tiles[i]);
+
+        }
         
-        levelCounter.setText(level + ".");
-        //for (int i = tileID; i < squares+tileID; i++) {
-        for (int i = 0; i < 2; i++) {
-            tiles[i] = new JLabel("");
-            tiles[i].setSize(W, H);
-            tiles[i].setBackground(Color.black);
-            tiles[i].setOpaque(true);
-            counter = i;
-            belongs[counter] = randomInt(1,4);
-            Thread[] threads = new Thread[maxLevel*(5)+1];
-            
-            threads[counter] = new Thread(new Runnable() {
-                public void run() {
-                    for (int i = 0; i < slide1.getHeight() + 1; i++) {
-                        slideTile(tiles[counter], i);
-                        try {
-                            Thread.sleep(speed);
-                        } catch (Exception ex) {}
+        if (roundCounter != TILE_PER_ROUND) {
+            if (index == 10) {
+                formatTile(tiles[counter], getRandomPanel());
+                index = 0;
+                counter++;
+                roundCounter++;
+            } else {
+                index++;
+            }
+        } else {
+            timeout++;
+            if (timeout == speed/2) {
+                newRound();
+            }
+        }
+
+    }
+    
+    protected void startGame() {
+        
+        for (int i = 0; i < 100; i++) {
+            tiles[i] = new JLabel();
+        }
+        
+        Thread threads = new Thread();
+
+        threads = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    playGame();
+                    try {
+                        Thread.sleep(speed);
+                    } catch (Exception ex) {
+                        System.out.println(ex);
                     }
                 }
-            });
-
-            threads[counter].start();
-            
-            
-            //scheduleRunTask();
-            
-            tileID++;
-            
-        }
-        
-        
-
-        
-        
+            }
+        });
+        threads.start();
     }
-    
-    private void startGame() {
-        
-        if (playing == true) {
-            System.out.println("Game is already in progress.");
-            
-        } else {
-            
-            playing = true;
-            playNowButton.setVisible(false);
-            
-            startLevel();
-            
-        }
-        
-    }
+
     
     public int randomInt(int min, int max) {
         
@@ -126,6 +128,8 @@ public class Tiles extends javax.swing.JFrame {
     public Tiles() {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/tiles/resources/icons/tiles_icon.png")).getImage());
+        startGame();
+        newRound();
     }
 
     /**
@@ -141,7 +145,6 @@ public class Tiles extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         levelCounter = new javax.swing.JLabel();
-        playNowButton = new javax.swing.JButton();
         bottomBanner = new javax.swing.JPanel();
         slide1 = new javax.swing.JPanel();
         slide2 = new javax.swing.JPanel();
@@ -169,17 +172,6 @@ public class Tiles extends javax.swing.JFrame {
         levelCounter.setFont(new java.awt.Font("Agency FB", 1, 50)); // NOI18N
         levelCounter.setForeground(new java.awt.Color(102, 153, 255));
 
-        playNowButton.setBackground(new java.awt.Color(0, 0, 0));
-        playNowButton.setFont(new java.awt.Font("Agency FB", 1, 40)); // NOI18N
-        playNowButton.setForeground(new java.awt.Color(102, 153, 255));
-        playNowButton.setText("Play");
-        playNowButton.setBorder(null);
-        playNowButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playNowButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -188,17 +180,14 @@ public class Tiles extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(title)
                 .addGap(18, 18, 18)
-                .addComponent(playNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(levelCounter, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(levelCounter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(levelCounter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(playNowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(levelCounter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(title, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -261,7 +250,7 @@ public class Tiles extends javax.swing.JFrame {
         slide4.setLayout(slide4Layout);
         slide4Layout.setHorizontalGroup(
             slide4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         slide4Layout.setVerticalGroup(
             slide4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +287,7 @@ public class Tiles extends javax.swing.JFrame {
         );
 
         mBarOptions.setBackground(new java.awt.Color(204, 204, 204));
-        mBarOptions.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        mBarOptions.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mBarOptions.setForeground(new java.awt.Color(255, 51, 51));
         mBarOptions.setText("Options");
         mBarOptions.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -348,10 +337,6 @@ public class Tiles extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Created: Max Carter\nDate: 14/11/17\nSource: GitHub");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void playNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playNowButtonActionPerformed
-        startGame();
-    }//GEN-LAST:event_playNowButtonActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -399,7 +384,6 @@ public class Tiles extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JLabel levelCounter;
     private javax.swing.JMenu mBarOptions;
-    private javax.swing.JButton playNowButton;
     private javax.swing.JPanel slide1;
     private javax.swing.JPanel slide2;
     private javax.swing.JPanel slide3;

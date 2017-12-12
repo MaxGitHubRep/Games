@@ -247,10 +247,9 @@
               <Color blue="0" green="66" red="33" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="2">
                 <StringItem index="0" value="                        Race"/>
-                <StringItem index="1" value="                      Frenzy"/>
-                <StringItem index="2" value="                    Time Trial"/>
+                <StringItem index="1" value="                    Time Trial"/>
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Currently playing this mode!"/>

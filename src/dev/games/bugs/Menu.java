@@ -152,7 +152,7 @@ public class Menu extends javax.swing.JFrame {
         mode.setBackground(new java.awt.Color(51, 153, 0));
         mode.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         mode.setForeground(new java.awt.Color(51, 102, 0));
-        mode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                        Race", "                      Frenzy", "                    Time Trial" }));
+        mode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                        Race", "                    Time Trial" }));
         mode.setToolTipText("Currently playing this mode!");
         mode.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mode.addItemListener(new java.awt.event.ItemListener() {
