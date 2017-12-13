@@ -6,6 +6,9 @@
 package dev.games.tiles;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -29,6 +32,8 @@ public class Tiles extends javax.swing.JFrame {
     protected int roundCounter = 0;
     protected int timeout = 0;
     
+    protected boolean freeze = false;
+    
     protected JLabel[] tiles = new JLabel[TILE_PER_ROUND*ROUNDS];
     
     protected void formatTile(JLabel label, JPanel panel) {
@@ -44,6 +49,10 @@ public class Tiles extends javax.swing.JFrame {
     
     protected void updateTileLocation(JLabel tile) {
         tile.setLocation(tile.getX(), tile.getY()+10);
+        if (tile.getY()+TILE_HEIGHT >= slide1.getHeight() && tile.getBackground() != Color.green) {
+            freeze = true;
+            tile.setBackground(Color.red);
+        }
         repaint();
     }
     
@@ -69,46 +78,56 @@ public class Tiles extends javax.swing.JFrame {
     
     protected void newRound() {
         roundCounter = 0;
+        setProgressBar(roundCounter);
         round++;
         if (round-1 == ROUNDS) {
             endGame();
         } else {
             levelCounter.setText("Round: " + round);
-        speed = speed - 10;
+        speed = speed - 2;
         timeout = 0;
         }
 
     }
     
     protected void playGame() {
-        
-        for (int i = 0; i < counter; i++) {
-            updateTileLocation(tiles[i]);
+        if (freeze == false) {
+            for (int i = 0; i < counter; i++) {
+                updateTileLocation(tiles[i]);
+            }
 
-        }
-        
-        if (roundCounter != TILE_PER_ROUND) {
-            if (index == 10) {
-                formatTile(tiles[counter], getRandomPanel());
-                index = 0;
-                counter++;
-                roundCounter++;
+            if (roundCounter != TILE_PER_ROUND) {
+                if (index == 10) {
+                    formatTile(tiles[counter], getRandomPanel());
+                    index = 0;
+                    counter++;
+                    roundCounter++;
+                } else {
+                    index++;
+                }
             } else {
-                index++;
-            }
-        } else {
-            timeout++;
-            if (timeout == speed/2) {
-                newRound();
+                timeout++;
+                if (timeout == speed/2) {
+                    newRound();
+                }
             }
         }
-
+    }
+    
+    protected void setProgressBar(int i) {
+        pBar.setValue(i);
+    }
+    
+    protected void formatProgressBar() {
+        pBar.setMaximum(TILE_PER_ROUND);
+        pBar.setMinimum(0);
     }
     
     protected void startGame() {
         
         for (int i = 0; i < (TILE_PER_ROUND*ROUNDS); i++) {
             tiles[i] = new JLabel();
+            mouseEvent(tiles[i]);
         }
         
         Thread threads = new Thread();
@@ -129,18 +148,36 @@ public class Tiles extends javax.swing.JFrame {
     }
 
     
-    public int randomInt(int min, int max) {
+    protected int randomInt(int min, int max) {
         
         Random random = new Random();
         
         return random.nextInt((max-min)+1)+min;
     }
     
+    protected void hideTile(JLabel tile) {
+        tile.setBackground(Color.green);
+        setProgressBar(roundCounter);
+    }
+    
+    protected void mouseEvent(JLabel label) {
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (freeze == false) {
+                    hideTile(label);
+                }
+            }
+        }); 
+    }
+    
     public Tiles() {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/dev/games/tiles/resources/icons/tiles_icon.png")).getImage());
         startGame();
+        formatProgressBar();
         newRound();
+        
     }
 
     /**
@@ -157,20 +194,15 @@ public class Tiles extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         levelCounter = new javax.swing.JLabel();
         bottomBanner = new javax.swing.JPanel();
+        pBar = new javax.swing.JProgressBar();
         slide1 = new javax.swing.JPanel();
         slide2 = new javax.swing.JPanel();
         slide3 = new javax.swing.JPanel();
         slide4 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        mBarOptions = new javax.swing.JMenu();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tiles");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -203,18 +235,26 @@ public class Tiles extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        bottomBanner.setBackground(new java.awt.Color(255, 0, 0));
+        bottomBanner.setBackground(new java.awt.Color(102, 153, 255));
         bottomBanner.setForeground(new java.awt.Color(255, 0, 0));
+
+        pBar.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout bottomBannerLayout = new javax.swing.GroupLayout(bottomBanner);
         bottomBanner.setLayout(bottomBannerLayout);
         bottomBannerLayout.setHorizontalGroup(
             bottomBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(bottomBannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         bottomBannerLayout.setVerticalGroup(
             bottomBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGroup(bottomBannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pBar, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         slide1.setBackground(new java.awt.Color(204, 255, 204));
@@ -253,7 +293,7 @@ public class Tiles extends javax.swing.JFrame {
         );
         slide3Layout.setVerticalGroup(
             slide3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
         );
 
         slide4.setBackground(new java.awt.Color(153, 255, 204));
@@ -292,40 +332,11 @@ public class Tiles extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(slide3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(slide2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(slide4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(slide1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(slide1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(slide4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addComponent(bottomBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        mBarOptions.setBackground(new java.awt.Color(204, 204, 204));
-        mBarOptions.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        mBarOptions.setForeground(new java.awt.Color(255, 51, 51));
-        mBarOptions.setText("Options");
-        mBarOptions.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        mBarOptions.add(jSeparator2);
-
-        jMenuItem1.setText("About");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        mBarOptions.add(jMenuItem1);
-        mBarOptions.add(jSeparator1);
-
-        jMenuItem2.setText("Exit");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        mBarOptions.add(jMenuItem2);
-        mBarOptions.add(jSeparator3);
-
-        jMenuBar1.add(mBarOptions);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -340,14 +351,6 @@ public class Tiles extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Created: Max Carter\nDate: 14/11/17\nSource: GitHub");
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,16 +389,10 @@ public class Tiles extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomBanner;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JLabel levelCounter;
-    private javax.swing.JMenu mBarOptions;
+    private javax.swing.JProgressBar pBar;
     private javax.swing.JPanel slide1;
     private javax.swing.JPanel slide2;
     private javax.swing.JPanel slide3;
