@@ -6,21 +6,23 @@
 package dev.games.tiles;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 /**
  *
  * @author MC170171
  */
 public class Tiles extends javax.swing.JFrame {
 
-    protected final int ROUNDS = 10;
+    protected final int ROUNDS = 1;
     protected final int TILE_PER_ROUND = 20;
     protected final int TILE_WIDTH = 100;
     protected final int TILE_HEIGHT = 100;
@@ -80,12 +82,14 @@ public class Tiles extends javax.swing.JFrame {
         roundCounter = 0;
         setProgressBar(roundCounter);
         round++;
+        
         if (round-1 == ROUNDS) {
             endGame();
+            
         } else {
             levelCounter.setText("Round: " + round);
-        speed = speed - 2;
-        timeout = 0;
+            speed = speed - 2;
+            timeout = 0;
         }
 
     }
@@ -130,9 +134,10 @@ public class Tiles extends javax.swing.JFrame {
             mouseEvent(tiles[i]);
         }
         
-        Thread threads = new Thread();
+        /*Thread threads;
 
         threads = new Thread(new Runnable() {
+            @Override
             public void run() {
                 while (true) {
                     playGame();
@@ -144,15 +149,16 @@ public class Tiles extends javax.swing.JFrame {
                 }
             }
         });
-        threads.start();
+        threads.start();*/
+        startTimer();
+        
     }
 
     
+    
+    
     protected int randomInt(int min, int max) {
-        
-        Random random = new Random();
-        
-        return random.nextInt((max-min)+1)+min;
+        return new Random().nextInt((max-min)+1)+min;
     }
     
     protected void hideTile(JLabel tile) {
@@ -170,6 +176,21 @@ public class Tiles extends javax.swing.JFrame {
             }
         }); 
     }
+    private javax.swing.Timer timer;
+    
+    public void startTimer() {
+     
+        java.awt.event.ActionListener timerAction = new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                      playGame();
+            }
+        };
+       
+        timer = new javax.swing.Timer(speed, timerAction);
+        timer.start();  
+        
+    }
     
     public Tiles() {
         initComponents();
@@ -177,6 +198,10 @@ public class Tiles extends javax.swing.JFrame {
         startGame();
         formatProgressBar();
         newRound();
+        
+        
+        
+        
         
     }
 
@@ -382,6 +407,7 @@ public class Tiles extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new Tiles().setVisible(true);
             }
         });
