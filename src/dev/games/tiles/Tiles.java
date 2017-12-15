@@ -8,6 +8,7 @@ package dev.games.tiles;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Random;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -133,8 +134,8 @@ public class Tiles extends javax.swing.JFrame {
             tiles[i] = new JLabel();
             mouseEvent(tiles[i]);
         }
-        
-        /*Thread threads;
+    
+        Thread threads;
 
         threads = new Thread(new Runnable() {
             @Override
@@ -149,8 +150,8 @@ public class Tiles extends javax.swing.JFrame {
                 }
             }
         });
-        threads.start();*/
-        startTimer();
+        threads.start();
+        
         
     }
 
@@ -175,21 +176,6 @@ public class Tiles extends javax.swing.JFrame {
                 }
             }
         }); 
-    }
-    private javax.swing.Timer timer;
-    
-    public void startTimer() {
-     
-        java.awt.event.ActionListener timerAction = new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                      playGame();
-            }
-        };
-       
-        timer = new javax.swing.Timer(speed, timerAction);
-        timer.start();  
-        
     }
     
     public Tiles() {
