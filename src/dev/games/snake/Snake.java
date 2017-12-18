@@ -2,20 +2,22 @@ package dev.games.snake;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JLabel;
 
 public class Snake extends javax.swing.JFrame {
 
-    protected final int SNAKE_SIZE = 20;
+    protected final int SNAKE_SIZE = 40;
     protected final int BOARD_SIZE = 400;
-    protected final int BOARD_SQUARES = 8;
+    protected final int BOARD_SQUARES = BOARD_SIZE/SNAKE_SIZE;
     protected final int DEFAULT_INTERVAL = 20;
+    protected final int DEFAULT_LENGTH = 3;
+    protected final int DEFAULT_SPEED = 200;
     
     protected int direction = 3;
-    protected int speed = 200;
-    protected int defaultLength = 3;
-    protected int index = defaultLength;
+    protected int speed = DEFAULT_SPEED;
+    protected int index = DEFAULT_LENGTH;
     protected int interval = 0;
     
     protected JLabel food = new JLabel();
@@ -28,6 +30,7 @@ public class Snake extends javax.swing.JFrame {
         }
         addPosition(snake[0]);
         correctPosition(snake[0]);
+        checkCrossOver();
 
         if (snake[0].getX() == food.getX() && snake[0].getY() == food.getY()) {
             interval = DEFAULT_INTERVAL;
@@ -44,15 +47,26 @@ public class Snake extends javax.swing.JFrame {
         }
     }
 
+    protected void checkCrossOver() {
+        for (int i = 1; i < index; i++) {
+            if (snake[0].getX() == snake[i].getX() && snake[0].getY() == snake[i].getY()) {
+                for (int k = DEFAULT_LENGTH; k < index; k++) {
+                    snake[k].setVisible(false);
+                }
+                index = DEFAULT_LENGTH;
+                speed = DEFAULT_SPEED;
+            }
+        }
+    }
+    
     protected void startGame() {
-        
         for (int i = 0; i < (BOARD_SQUARES*BOARD_SQUARES); i++) {
             snake[i] = new JLabel();
         }
         
-        for (int i = 0; i < defaultLength; i++) {
+        for (int i = 0; i < DEFAULT_LENGTH; i++) {
             formatLabel(snake[i]);
-            snake[i].setLocation((defaultLength-1-i)*SNAKE_SIZE, 0);
+            snake[i].setLocation((DEFAULT_LENGTH-1-i)*SNAKE_SIZE, 0);
         }
         
         Thread threads = new Thread();
@@ -87,10 +101,30 @@ public class Snake extends javax.swing.JFrame {
         food.setOpaque(true);
         food.setVisible(true);
         //String direc = "/dev/games/bugs/resources/foodmodels/food.fw.png";
-        //label.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
+        //food.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
         back.add(food);
-        food.setLocation(getRCoord(), getRCoord());
+        //food.setLocation(getRCoord(), getRCoord());
+        setRandomLoc();
 
+    }
+    
+    protected void setRandomLoc() {
+        ArrayList<String> squares = new ArrayList<>();
+        for (int i = 0; i < BOARD_SQUARES; i++) {
+            for (int k = 0; k < BOARD_SQUARES; k++) {
+                squares.add((i*SNAKE_SIZE) + ":" + (k*SNAKE_SIZE));
+            }
+        }
+        
+        for (int i = 0; i < index; i++) {
+            String coords = snake[i].getX() + ":" + snake[i].getY();
+            if (squares.contains(coords)) {
+                squares.remove(coords);
+            }
+        }
+        String[] toParse = squares.get(randomInt(1, squares.size()-1)).split(":");
+        
+        food.setLocation(Integer.parseInt(toParse[0]), Integer.parseInt(toParse[1]));
     }
     
     protected int randomInt(int min, int max) {
