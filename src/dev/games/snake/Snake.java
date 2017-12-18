@@ -8,10 +8,10 @@ import javax.swing.JLabel;
 
 public class Snake extends javax.swing.JFrame {
 
-    protected final int SNAKE_SIZE = 40;
+    protected final int SNAKE_SIZE = 20;
     protected final int BOARD_SIZE = 400;
     protected final int BOARD_SQUARES = BOARD_SIZE/SNAKE_SIZE;
-    protected final int DEFAULT_INTERVAL = 20;
+    protected final int DEFAULT_INTERVAL = 25;
     protected final int DEFAULT_LENGTH = 3;
     protected final int DEFAULT_SPEED = 200;
     
