@@ -2,6 +2,7 @@ package dev.games.grid;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JLabel;
 
@@ -20,16 +21,16 @@ public class Main extends javax.swing.JFrame {
         for (int i = 0; i < count; i++) {
             switch (direction) {
                 case 1:
-                    tiles[i].setLocation(tiles[i].getX(), tiles[i].getY()+100);
-                    break;
-                case 2:
                     tiles[i].setLocation(tiles[i].getX(), tiles[i].getY()-100);
                     break;
+                case 2:
+                    tiles[i].setLocation(tiles[i].getX(), tiles[i].getY()+100);
+                    break;
                 case 3:
-                    tiles[i].setLocation(tiles[i].getX()-100, tiles[i].getY());
+                    tiles[i].setLocation(tiles[i].getX()+100, tiles[i].getY());
                     break;
                 case 4:
-                    tiles[i].setLocation(tiles[i].getX()+100, tiles[i].getY());
+                    tiles[i].setLocation(tiles[i].getX()-100, tiles[i].getY());
                     break;
             }
         }
@@ -43,11 +44,43 @@ public class Main extends javax.swing.JFrame {
     }
     
     protected void startGame() {
+        createNewTile();
         scoreDisplay.setText("Score: 0");
     }
     
-    protected int getRCoord() {
-        return randomInt(0, 3)*100;
+    protected void setLoc(JLabel label, String data) {
+        String[] coords = data.split(", ");
+        
+        label.setLocation(Integer.parseInt(coords[0]), Integer.parseInt(coords[1]));
+    }
+    
+    protected void setRCoord(JLabel label) {
+        ArrayList squares = new ArrayList<>();
+        for (int one = 0; one < 4; one++) {
+            for (int two = 0; two < 4; two++) {
+                squares.add((one*100) + ", " + (two*100));
+            } 
+        }   
+        ArrayList there = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            there.add(tiles[i].getX() + ", " + tiles[i].getY());
+        }
+        
+        try {
+
+            for (Object item : squares) {
+                for (Object in : there) {
+                    if (!item.equals(in)) {
+                        setLoc(label, ""+item);
+                        break;
+                    }
+                }
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
     }
     
     protected int randomInt(int min, int max) {
@@ -62,7 +95,7 @@ public class Main extends javax.swing.JFrame {
         label.setBackground(Color.red);
         label.setText("2");
         container.add(label);
-        label.setLocation(getRCoord(), getRCoord());
+        setRCoord(label);
         label.setVisible(true);
         repaint();
     }

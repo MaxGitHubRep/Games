@@ -68,7 +68,7 @@ public class Methods {
     }
     
     protected int getRCoord() {
-        return randomInt(1, 8)*SPACE;
+        return randomInt(0, 8)*SPACE;
     }
     
     protected void addPosition(JLabel label, int direction, String type) {
