@@ -8,17 +8,19 @@ import javax.swing.JLabel;
 
 public class Snake extends javax.swing.JFrame {
 
-    protected final int SNAKE_SIZE = 20;
+    protected final int SNAKE_SIZE = 40;
     protected final int BOARD_SIZE = 400;
     protected final int BOARD_SQUARES = BOARD_SIZE/SNAKE_SIZE;
-    protected final int DEFAULT_INTERVAL = 25;
-    protected final int DEFAULT_LENGTH = 3;
-    protected final int DEFAULT_SPEED = 200;
+    protected final int DEFAULT_INTERVAL = 10;
+    protected final int DEFAULT_LENGTH = 4;
+    protected final int DEFAULT_SPEED = 150;
     
     protected int direction = 3;
     protected int speed = DEFAULT_SPEED;
     protected int index = DEFAULT_LENGTH;
     protected int interval = 0;
+    
+    protected boolean eatMe = false;
     
     protected JLabel food = new JLabel();
     
@@ -37,13 +39,11 @@ public class Snake extends javax.swing.JFrame {
             formatLabel(snake[index]);
             index++;
             speed = speed - 1;
+            eatMe = false;
         }
         
-        if (interval == DEFAULT_INTERVAL) {
-            formatFood();
-            interval = 0;
-        } else {
-            interval++;
+        if (eatMe == false) {
+                formatFood();
         }
     }
 
@@ -100,11 +100,9 @@ public class Snake extends javax.swing.JFrame {
         food.setSize(SNAKE_SIZE, SNAKE_SIZE);
         food.setOpaque(true);
         food.setVisible(true);
-        //String direc = "/dev/games/bugs/resources/foodmodels/food.fw.png";
-        //food.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
         back.add(food);
-        //food.setLocation(getRCoord(), getRCoord());
         setRandomLoc();
+        eatMe = true;
 
     }
     
