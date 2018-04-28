@@ -156,25 +156,21 @@ public class Snake extends javax.swing.JFrame {
     }
     
     protected void addPosition(JLabel label) {
-        try {
-            switch (direction) {
-                case 1:
-                    label.setLocation(label.getX(), label.getY()-SNAKE_SIZE);
-                    break;
-                case 2:
-                    label.setLocation(label.getX(), label.getY()+SNAKE_SIZE);
-                    break;
-                case 3:
-                    label.setLocation(label.getX()+SNAKE_SIZE, label.getY());
-                    break;
-                case 4:
-                    label.setLocation(label.getX()-SNAKE_SIZE, label.getY());
-                    break;
-            }
-            
-        } catch (Exception ex) {
-            
+        switch (direction) {
+            case 1:
+                label.setLocation(label.getX(), label.getY()-SNAKE_SIZE);
+                break;
+            case 2:
+                label.setLocation(label.getX(), label.getY()+SNAKE_SIZE);
+                break;
+            case 3:
+                label.setLocation(label.getX()+SNAKE_SIZE, label.getY());
+                break;
+            case 4:
+                label.setLocation(label.getX()-SNAKE_SIZE, label.getY());
+                break;
         }
+            
     }
     
     public Snake() {
